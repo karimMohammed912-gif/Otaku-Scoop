@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Data {
 
-@JsonKey(name: 'Page') Page? get page;
+ Page? get page;
 /// Create a copy of Data
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $DataCopyWith<$Res>  {
   factory $DataCopyWith(Data value, $Res Function(Data) _then) = _$DataCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'Page') Page? page
+ Page? page
 });
 
 
@@ -162,7 +162,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'Page')  Page? page)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Page? page)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Data() when $default != null:
 return $default(_that.page);case _:
@@ -183,7 +183,7 @@ return $default(_that.page);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'Page')  Page? page)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Page? page)  $default,) {final _that = this;
 switch (_that) {
 case _Data():
 return $default(_that.page);}
@@ -200,7 +200,7 @@ return $default(_that.page);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'Page')  Page? page)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Page? page)?  $default,) {final _that = this;
 switch (_that) {
 case _Data() when $default != null:
 return $default(_that.page);case _:
@@ -215,10 +215,12 @@ return $default(_that.page);case _:
 @JsonSerializable()
 
 class _Data implements Data {
-  const _Data({@JsonKey(name: 'Page') this.page});
+  const _Data({this.page});
   factory _Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 
-@override@JsonKey(name: 'Page') final  Page? page;
+@override
+@JsonKey(name: 'Page')
+final Page? page;
 
 /// Create a copy of Data
 /// with the given fields replaced by the non-null parameter values.
@@ -253,7 +255,7 @@ abstract mixin class _$DataCopyWith<$Res> implements $DataCopyWith<$Res> {
   factory _$DataCopyWith(_Data value, $Res Function(_Data) _then) = __$DataCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'Page') Page? page
+ Page? page
 });
 
 

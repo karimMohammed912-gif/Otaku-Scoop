@@ -7,11 +7,11 @@ part of 'data.dart';
 // **************************************************************************
 
 _Data _$DataFromJson(Map<String, dynamic> json) => _Data(
-  page: json['Page'] == null
+  page: json['page'] == null
       ? null
-      : Page.fromJson(json['Page'] as Map<String, dynamic>),
+      : Page.fromJson(json['page'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$DataToJson(_Data instance) => <String, dynamic>{
-  'Page': instance.page,
+  'page': instance.page,
 };

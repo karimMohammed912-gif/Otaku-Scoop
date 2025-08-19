@@ -8,7 +8,7 @@ part 'data.g.dart';
 @freezed
 sealed class Data with _$Data {
   const factory Data({
-    @JsonKey(name: 'Page') Page? page,
+    Page? page,
   }) = _Data;
 
   factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
