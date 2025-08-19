@@ -216,10 +216,6 @@ return $default(_that.page);case _:
 
 class _Data implements Data {
   const _Data({@JsonKey(name: 'Page') this.page});
-
-  @override
-  @override
-  Page? get pageKey => page;
   factory _Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 
 @override@JsonKey(name: 'Page') final  Page? page;
