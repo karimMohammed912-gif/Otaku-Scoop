@@ -19,14 +19,14 @@ abstract class BaseRepo {
         if (variables != null) "variables": variables,
       });
 
-      // GraphQL ممكن يرجّع 200 ومعاه errors في البودي
+      
       final errors = res["errors"] as List<dynamic>?;
       if (errors != null && errors.isNotEmpty) {
         final msg = errors.map((e) => e["message"]).join(" | ");
         return Result.failure(Failure.graphql(msg));
       }
 
-      final data = parser(res); // انت بتحدّد هتسحب إيه من JSON
+      final data = parser(res); 
       return Result.success(data);
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionTimeout ||

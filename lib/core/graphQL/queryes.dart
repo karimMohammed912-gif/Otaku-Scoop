@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 class Querys {
   String getAnimeDetailsQuery(int id) {
@@ -50,7 +49,7 @@ class Querys {
 ''';
   }
 
-  String getTopAnimeQuery(Int perPage, int page) {
+  String getTopAnimeQuery({required int perPage,required int page}) {
     return '''
 query {
   Page(perPage:$perPage , page: $page) {
@@ -67,7 +66,7 @@ query {
       episodes
     }
   }
-}''';
+}}''';
   }
   String getSeasonalAnimeQuery(int page, {required String season}) {
     return '''query {

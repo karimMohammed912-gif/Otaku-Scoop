@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:otaku_scope/core/widgets/custom_drawer.dart';
 import 'package:otaku_scope/features/anime_details/view/details_view.dart';
 import 'package:otaku_scope/features/last_update/view/last_update_view.dart';
+import 'package:otaku_scope/features/onbardingFeature/onbarding_view.dart';
 import 'package:otaku_scope/features/recommination_anime/view/recommendation_anime_view.dart';
 import 'package:otaku_scope/features/sesonal_anime/view/sesonal_anime_view.dart';
 import 'package:otaku_scope/features/top_anime/view/top_anime_view.dart';
@@ -14,8 +15,13 @@ final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
 /// The route configuration.
 final GoRouter routerConfig = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/',
+  initialLocation: '/onboarding',
   routes: [
+    GoRoute(
+      name: 'Onboarding',
+      path: '/onboarding',
+      builder: (context, state) => const OnboardingView(),
+    ),
     // Shell for main sections
     ShellRoute(
       navigatorKey: _shellNavigatorKey,

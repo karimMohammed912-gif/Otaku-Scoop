@@ -218,9 +218,7 @@ class _Data implements Data {
   const _Data({this.page});
   factory _Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 
-@override
-@JsonKey(name: 'Page')
-final Page? page;
+@override final  Page? page;
 
 /// Create a copy of Data
 /// with the given fields replaced by the non-null parameter values.

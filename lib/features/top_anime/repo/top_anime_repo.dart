@@ -11,7 +11,7 @@ class TopAnimeRepo extends BaseRepo {
     required int page,
     int perPage = 20,
   }) async {
-    var query = Querys().getTopAnimeQuery(perPage: 25, page: 1);
+    var query = Querys().getTopAnimeQuery(perPage: perPage, page: page);
 
     return request<TopAnimeModel>(
       query: query,
@@ -19,7 +19,7 @@ class TopAnimeRepo extends BaseRepo {
         "page": page,
         "perPage": perPage,
       },
-      parser: (json) => TopAnimeModel.fromJson(json["data"]["Page"]),
+      parser: (json) => TopAnimeModel.fromJson(json),
     );
   }
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Page {
 
- List<Media>? get media;
+ PageInfo? get pageInfo; List<Media>? get media;
 /// Create a copy of Page
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $PageCopyWith<Page> get copyWith => _$PageCopyWithImpl<Page>(this as Page, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Page&&const DeepCollectionEquality().equals(other.media, media));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Page&&(identical(other.pageInfo, pageInfo) || other.pageInfo == pageInfo)&&const DeepCollectionEquality().equals(other.media, media));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(media));
+int get hashCode => Object.hash(runtimeType,pageInfo,const DeepCollectionEquality().hash(media));
 
 @override
 String toString() {
-  return 'Page(media: $media)';
+  return 'Page(pageInfo: $pageInfo, media: $media)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $PageCopyWith<$Res>  {
   factory $PageCopyWith(Page value, $Res Function(Page) _then) = _$PageCopyWithImpl;
 @useResult
 $Res call({
- List<Media>? media
+ PageInfo? pageInfo, List<Media>? media
 });
 
 
-
+$PageInfoCopyWith<$Res>? get pageInfo;
 
 }
 /// @nodoc
@@ -65,13 +65,26 @@ class _$PageCopyWithImpl<$Res>
 
 /// Create a copy of Page
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? media = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? pageInfo = freezed,Object? media = freezed,}) {
   return _then(_self.copyWith(
-media: freezed == media ? _self.media : media // ignore: cast_nullable_to_non_nullable
+pageInfo: freezed == pageInfo ? _self.pageInfo : pageInfo // ignore: cast_nullable_to_non_nullable
+as PageInfo?,media: freezed == media ? _self.media : media // ignore: cast_nullable_to_non_nullable
 as List<Media>?,
   ));
 }
+/// Create a copy of Page
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PageInfoCopyWith<$Res>? get pageInfo {
+    if (_self.pageInfo == null) {
+    return null;
+  }
 
+  return $PageInfoCopyWith<$Res>(_self.pageInfo!, (value) {
+    return _then(_self.copyWith(pageInfo: value));
+  });
+}
 }
 
 
@@ -150,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<Media>? media)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( PageInfo? pageInfo,  List<Media>? media)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Page() when $default != null:
-return $default(_that.media);case _:
+return $default(_that.pageInfo,_that.media);case _:
   return orElse();
 
 }
@@ -171,10 +184,10 @@ return $default(_that.media);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<Media>? media)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( PageInfo? pageInfo,  List<Media>? media)  $default,) {final _that = this;
 switch (_that) {
 case _Page():
-return $default(_that.media);}
+return $default(_that.pageInfo,_that.media);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -188,10 +201,10 @@ return $default(_that.media);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<Media>? media)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( PageInfo? pageInfo,  List<Media>? media)?  $default,) {final _that = this;
 switch (_that) {
 case _Page() when $default != null:
-return $default(_that.media);case _:
+return $default(_that.pageInfo,_that.media);case _:
   return null;
 
 }
@@ -203,9 +216,10 @@ return $default(_that.media);case _:
 @JsonSerializable()
 
 class _Page implements Page {
-  const _Page({final  List<Media>? media}): _media = media;
+  const _Page({this.pageInfo, final  List<Media>? media}): _media = media;
   factory _Page.fromJson(Map<String, dynamic> json) => _$PageFromJson(json);
 
+@override final  PageInfo? pageInfo;
  final  List<Media>? _media;
 @override List<Media>? get media {
   final value = _media;
@@ -229,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Page&&const DeepCollectionEquality().equals(other._media, _media));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Page&&(identical(other.pageInfo, pageInfo) || other.pageInfo == pageInfo)&&const DeepCollectionEquality().equals(other._media, _media));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_media));
+int get hashCode => Object.hash(runtimeType,pageInfo,const DeepCollectionEquality().hash(_media));
 
 @override
 String toString() {
-  return 'Page(media: $media)';
+  return 'Page(pageInfo: $pageInfo, media: $media)';
 }
 
 
@@ -249,11 +263,11 @@ abstract mixin class _$PageCopyWith<$Res> implements $PageCopyWith<$Res> {
   factory _$PageCopyWith(_Page value, $Res Function(_Page) _then) = __$PageCopyWithImpl;
 @override @useResult
 $Res call({
- List<Media>? media
+ PageInfo? pageInfo, List<Media>? media
 });
 
 
-
+@override $PageInfoCopyWith<$Res>? get pageInfo;
 
 }
 /// @nodoc
@@ -266,14 +280,27 @@ class __$PageCopyWithImpl<$Res>
 
 /// Create a copy of Page
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? media = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? pageInfo = freezed,Object? media = freezed,}) {
   return _then(_Page(
-media: freezed == media ? _self._media : media // ignore: cast_nullable_to_non_nullable
+pageInfo: freezed == pageInfo ? _self.pageInfo : pageInfo // ignore: cast_nullable_to_non_nullable
+as PageInfo?,media: freezed == media ? _self._media : media // ignore: cast_nullable_to_non_nullable
 as List<Media>?,
   ));
 }
 
+/// Create a copy of Page
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$PageInfoCopyWith<$Res>? get pageInfo {
+    if (_self.pageInfo == null) {
+    return null;
+  }
 
+  return $PageInfoCopyWith<$Res>(_self.pageInfo!, (value) {
+    return _then(_self.copyWith(pageInfo: value));
+  });
+}
 }
 
 // dart format on
