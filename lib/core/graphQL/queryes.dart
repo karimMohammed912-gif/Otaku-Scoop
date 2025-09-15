@@ -53,16 +53,31 @@ class Querys {
 ''';
   }
 
-  String getTopAnimeQuery({required int perPage,required int page, required TopAnimeCategory category}) {
+   String getTopAnimeQuery({required int perPage,required int page, required TopAnimeCategory category}) {
 
-    dev.log("getTopAnimeQuery called with page: $page");
+    
+    String categoryFilter;
+    String sort = 'POPULARITY_DESC';
+    switch (category) {
+      case TopAnimeCategory.movies:
+        categoryFilter = 'format: MOVIE';
+        break;
+      case TopAnimeCategory.tv:
+        categoryFilter = 'format: TV';
+        break;
+      case TopAnimeCategory.upcoming:
+        categoryFilter = 'status: NOT_YET_RELEASED';
+        sort = 'START_DATE';
+        break;
+    }
     return '''
  query {
-  Page(perPage: 10, page: $page) {
-    media(sort: POPULARITY_DESC, type: ANIME) {
+  Page(perPage: $perPage, page: $page) {
+    media(sort: $sort, type: ANIME, $categoryFilter) {
       id
       title {
         english
+        romaji
       }
       coverImage {
         large
@@ -93,6 +108,13 @@ class Querys {
       episodes
       averageScore
     }
+     pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
+    }
   }
 }
 ''';
@@ -112,6 +134,13 @@ class Querys {
       }
       episodes
       averageScore
+    }
+      pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
     }
   }
 }''';

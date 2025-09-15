@@ -11,7 +11,7 @@ class TopAnimeRepo extends BaseRepo {
   Future<Result<Data>> fetchTopAnime({
     required int page,
     required TopAnimeCategory category,
-    int perPage = 20,
+    int perPage = 50,
   }) async {
     var query = Querys().getTopAnimeQuery(
       perPage: perPage,

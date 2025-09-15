@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 
 class GridItemWidget extends StatelessWidget {
   const GridItemWidget({
@@ -37,18 +38,25 @@ class GridItemWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
                   child: CachedNetworkImage(
-                    imageUrl: imageUrl?.isNotEmpty == true
-                        ? imageUrl!
-                        : "https://via.placeholder.com/150",
-                    placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.broken_image, color: Colors.red),
-                    fit: BoxFit.cover,
+                    fadeOutDuration: const Duration(milliseconds: 100),
+                      imageUrl: imageUrl?.isNotEmpty == true
+                          ? imageUrl!
+                          : "https://via.placeholder.com/150",
+                      placeholder: (context, url) => Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(
+                              color: Colors.grey[200],
+                            ),
+                          ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.broken_image, color: Colors.red),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
-            ),
+            
             const SizedBox(height: 6.0),
             Text(
               title ?? 'Anime Title',

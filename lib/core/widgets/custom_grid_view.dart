@@ -23,8 +23,7 @@ class _CustomGridViewState extends ConsumerState<CustomGridView>
     final ScrollController _scrollController = ScrollController();
 
   @override
-  bool get wantKeepAlive => true; // ✨ كده التاب هيفضل عايش
-
+  bool get wantKeepAlive => true ;
   @override
   void initState() {
     super.initState();
@@ -40,10 +39,10 @@ class _CustomGridViewState extends ConsumerState<CustomGridView>
       vsync: this,
     );
 
-    _scrollController.addListener(()async{
+    _scrollController.addListener(()  {
+      // Trigger loadMore when near the bottom
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 200) {
-            await Future.delayed(const Duration(seconds: 1));
         final notifier = ref.read(widget.provider!.notifier);
         if ((notifier as dynamic).loadMore != null) {
           (notifier as dynamic).loadMore();

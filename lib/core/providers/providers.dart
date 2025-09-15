@@ -26,7 +26,7 @@ final topAnimeRepoProvider = Provider((ref) {
 });
 
 final topAnimeNotifierProvider =
-    StateNotifierProvider<TopAnimeNotifier, PaginatedState<Media>>((ref) {
+    StateNotifierProvider.family<TopAnimeNotifier, PaginatedState<Media>, TopAnimeCategory>((ref, TopAnimeCategory category) {
   final repo = ref.watch(topAnimeRepoProvider);
-  return TopAnimeNotifier(repo, TopAnimeCategory.tv);
+  return TopAnimeNotifier(repo, category);
 });
