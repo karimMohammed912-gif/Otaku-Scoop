@@ -1,27 +1,37 @@
+import 'dart:developer' as dev;
+
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
 import 'package:otaku_scope/features/top_anime/model/top_anime_model/media.dart';
-import 'package:otaku_scope/features/top_anime/model/top_anime_model/top_anime_model.dart';
 import 'package:otaku_scope/features/top_anime/repo/top_anime_repo.dart';
 
-class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
-  final TopAnimeRepo repo;
 
-  TopAnimeNotifier(this.repo) : super(PaginatedState.initial());
+
+
+
+class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
+  final TopAnimeRepo _repo;
+  final TopAnimeCategory _category;
+
+  // FIX: This line is CRITICAL. It must call the stati%%%%c generic factory.
+  TopAnimeNotifier(this._repo, this._category) : super(PaginatedState.initial<Media>());
 
   Future<void> loadFirstPage() async {
     if (state.isLoading) return;
-    state = state.copyWith(isLoading: true, error: null, currentPage: 0, hasNextPage: true, items: null);
-    final result = await repo.fetchTopAnime(page: 1);
+    // This line will now work because `state` is PaginatedState<Media>
+    state = state.copyWith(isLoading: true, error: null); 
+
+    final result = await _repo.fetchTopAnime(page: 1, category: _category);
     result.when(
       success: (data) {
+        dev.log("data from provider ${data.toString()}");
         state = state.copyWith(
           isLoading: false,
-          items: data.data!.page!.media,
-          
-          currentPage: data.data!.page!.pageInfo!.currentPage,
-          hasNextPage: data.data!.page!.pageInfo!.hasNextPage,
+          items: data.page?.media,
+          currentPage: data.page?.pageInfo?.currentPage,
+          hasNextPage: data.page?.pageInfo?.hasNextPage,
         );
       },
       failure: (f) {
@@ -31,17 +41,23 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
   }
 
   Future<void> loadMore() async {
-    if (state.isLoadingMore || !state.hasNextPage) return;
+   await Future.delayed(const Duration(microseconds: 2500));
+
     state = state.copyWith(isLoadingMore: true, error: null);
-    final nextPage = state.currentPage + 1;
-    final result = await repo.fetchTopAnime(page: nextPage);
+    final nextPage = (state.currentPage) + 1;
+
+    // FIX: Pass the category to the repository method
+    final result = await _repo.fetchTopAnime(
+      page: nextPage,
+      category: _category,
+    );
     result.when(
       success: (data) {
         state = state.copyWith(
           isLoadingMore: false,
-          items: [...?state.items, ...?data.data!.page!.media],
-          currentPage: data.data!.page!.pageInfo!.currentPage,
-          hasNextPage:  data.data!.page!.pageInfo!.hasNextPage,
+          items: [...state.items, ...?data.page?.media],
+          currentPage: data.page?.pageInfo?.currentPage,
+          hasNextPage: data.page?.pageInfo?.hasNextPage,
         );
       },
       failure: (f) {

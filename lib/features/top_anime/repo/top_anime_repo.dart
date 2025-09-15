@@ -1,25 +1,29 @@
 
 import 'package:otaku_scope/core/graphQL/queryes.dart';
 import 'package:otaku_scope/core/repo/base_repo.dart';
+import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-import 'package:otaku_scope/features/top_anime/model/top_anime_model/top_anime_model.dart';
+import 'package:otaku_scope/features/top_anime/model/top_anime_model/data.dart';
 
 class TopAnimeRepo extends BaseRepo {
   TopAnimeRepo(super.service);
 
-  Future<Result<TopAnimeModel>> fetchTopAnime({
+  Future<Result<Data>> fetchTopAnime({
     required int page,
+    required TopAnimeCategory category,
     int perPage = 20,
   }) async {
-    var query = Querys().getTopAnimeQuery(perPage: perPage, page: page);
+    var query = Querys().getTopAnimeQuery(
+      perPage: perPage,
+      page: page,
+      category: category,
+    );
 
-    return request<TopAnimeModel>(
+
+
+    return request<Data>(
       query: query,
-      variables: {
-        "page": page,
-        "perPage": perPage,
-      },
-      parser: (json) => TopAnimeModel.fromJson(json),
+      parser: (json) => Data.fromJson(json),
     );
   }
 }

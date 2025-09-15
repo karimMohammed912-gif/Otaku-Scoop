@@ -1,4 +1,8 @@
 
+import 'dart:developer' as dev;
+
+import 'package:otaku_scope/core/utils/enums.dart';
+
 class Querys {
   String getAnimeDetailsQuery(int id) {
     return '''query {
@@ -49,24 +53,30 @@ class Querys {
 ''';
   }
 
-  String getTopAnimeQuery({required int perPage,required int page}) {
+  String getTopAnimeQuery({required int perPage,required int page, required TopAnimeCategory category}) {
+
+    dev.log("getTopAnimeQuery called with page: $page");
     return '''
-query {
-  Page(perPage:$perPage , page: $page) {
+ query {
+  Page(perPage: 10, page: $page) {
     media(sort: POPULARITY_DESC, type: ANIME) {
       id
       title {
-        romaji
         english
       }
       coverImage {
         large
       }
-      averageScore
-      episodes
+    }    pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
     }
   }
-}}''';
+}
+  ''';
   }
   String getSeasonalAnimeQuery(int page, {required String season}) {
     return '''query {

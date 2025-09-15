@@ -15,7 +15,7 @@ final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
 /// The route configuration.
 final GoRouter routerConfig = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/onboarding',
+  initialLocation: '/',
   routes: [
     GoRoute(
       name: 'Onboarding',
