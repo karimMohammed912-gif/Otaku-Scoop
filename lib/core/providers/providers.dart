@@ -5,7 +5,7 @@ import 'package:otaku_scope/core/graphQL/graphql_service.dart';
 import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/features/top_anime/controller/top_anime_provider.dart';
-import 'package:otaku_scope/features/top_anime/model/top_anime_model/media.dart';
+import 'package:otaku_scope/features/top_anime/models/media.dart';
 import 'package:otaku_scope/features/top_anime/repo/top_anime_repo.dart';
 
 final dioProvider = Provider<Dio>((ref) {

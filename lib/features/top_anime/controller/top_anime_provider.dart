@@ -5,7 +5,7 @@ import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/errors/failure.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-import 'package:otaku_scope/features/top_anime/model/top_anime_model/media.dart';
+import 'package:otaku_scope/features/top_anime/models/media.dart';
 import 'package:otaku_scope/features/top_anime/repo/top_anime_repo.dart';
 
 
