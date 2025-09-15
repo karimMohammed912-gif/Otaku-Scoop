@@ -1,4 +1,7 @@
-import 'dart:ffi';
+
+import 'dart:developer' as dev;
+
+import 'package:otaku_scope/core/utils/enums.dart';
 
 class Querys {
   String getAnimeDetailsQuery(int id) {
@@ -50,24 +53,45 @@ class Querys {
 ''';
   }
 
-  String getTopAnimeQuery(Int perPage, int page) {
+   String getTopAnimeQuery({required int perPage,required int page, required TopAnimeCategory category}) {
+
+    
+    String categoryFilter;
+    String sort = 'POPULARITY_DESC';
+    switch (category) {
+      case TopAnimeCategory.movies:
+        categoryFilter = 'format: MOVIE';
+        break;
+      case TopAnimeCategory.tv:
+        categoryFilter = 'format: TV';
+        break;
+      case TopAnimeCategory.upcoming:
+        categoryFilter = 'status: NOT_YET_RELEASED';
+        sort = 'START_DATE';
+        break;
+    }
     return '''
-query {
-  Page(perPage:$perPage , page: $page) {
-    media(sort: POPULARITY_DESC, type: ANIME) {
+ query {
+  Page(perPage: $perPage, page: $page) {
+    media(sort: $sort, type: ANIME, $categoryFilter) {
       id
       title {
-        romaji
         english
+        romaji
       }
       coverImage {
         large
       }
-      averageScore
-      episodes
+    }    pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
     }
   }
-}''';
+}
+  ''';
   }
   String getSeasonalAnimeQuery(int page, {required String season}) {
     return '''query {
@@ -83,6 +107,13 @@ query {
       }
       episodes
       averageScore
+    }
+     pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
     }
   }
 }
@@ -103,6 +134,13 @@ query {
       }
       episodes
       averageScore
+    }
+      pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
     }
   }
 }''';

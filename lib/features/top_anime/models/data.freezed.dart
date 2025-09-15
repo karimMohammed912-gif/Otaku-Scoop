@@ -15,6 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Data {
 
+// FIX: Add this annotation to map the JSON key 'Page' to this property.
 @JsonKey(name: 'Page') Page? get page;
 /// Create a copy of Data
 /// with the given fields replaced by the non-null parameter values.
@@ -216,12 +217,9 @@ return $default(_that.page);case _:
 
 class _Data implements Data {
   const _Data({@JsonKey(name: 'Page') this.page});
-
-  @override
-  @override
-  Page? get pageKey => page;
   factory _Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
 
+// FIX: Add this annotation to map the JSON key 'Page' to this property.
 @override@JsonKey(name: 'Page') final  Page? page;
 
 /// Create a copy of Data

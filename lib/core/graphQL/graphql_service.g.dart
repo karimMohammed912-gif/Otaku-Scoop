@@ -20,7 +20,7 @@ class _GraphQLService implements GraphQLService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<Map<String, dynamic>> sendQuery(Map<String, dynamic> body) async {
+  Future<Map<String, dynamic>> send(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

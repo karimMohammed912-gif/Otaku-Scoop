@@ -13,6 +13,7 @@ class OtakuScope extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData.dark(),
+      
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       routerConfig: routerConfig,
