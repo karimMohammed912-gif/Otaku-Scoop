@@ -1,6 +1,4 @@
 
-import 'dart:developer' as dev;
-
 import 'package:otaku_scope/core/utils/enums.dart';
 
 class Querys {
