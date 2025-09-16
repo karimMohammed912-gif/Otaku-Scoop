@@ -11,10 +11,13 @@ sealed  class Media with _$Media {
 	const factory Media({
 		int? id,
 		Title? title,
+    int? episodes,
+    int? averageScore,
+
 		CoverImage? coverImage,
 		dynamic chapters,
 		dynamic volumes,
-		int? averageScore,
+
 	}) = _Media;
 
 	factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);

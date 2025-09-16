@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Media {
 
- int? get id; Title? get title; CoverImage? get coverImage; dynamic get chapters; dynamic get volumes; int? get averageScore;
+ int? get id; Title? get title; int? get episodes; int? get averageScore; CoverImage? get coverImage; dynamic get chapters; dynamic get volumes;
 /// Create a copy of Media
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $MediaCopyWith<Media> get copyWith => _$MediaCopyWithImpl<Media>(this as Media, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Media&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.coverImage, coverImage) || other.coverImage == coverImage)&&const DeepCollectionEquality().equals(other.chapters, chapters)&&const DeepCollectionEquality().equals(other.volumes, volumes)&&(identical(other.averageScore, averageScore) || other.averageScore == averageScore));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Media&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.episodes, episodes) || other.episodes == episodes)&&(identical(other.averageScore, averageScore) || other.averageScore == averageScore)&&(identical(other.coverImage, coverImage) || other.coverImage == coverImage)&&const DeepCollectionEquality().equals(other.chapters, chapters)&&const DeepCollectionEquality().equals(other.volumes, volumes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,coverImage,const DeepCollectionEquality().hash(chapters),const DeepCollectionEquality().hash(volumes),averageScore);
+int get hashCode => Object.hash(runtimeType,id,title,episodes,averageScore,coverImage,const DeepCollectionEquality().hash(chapters),const DeepCollectionEquality().hash(volumes));
 
 @override
 String toString() {
-  return 'Media(id: $id, title: $title, coverImage: $coverImage, chapters: $chapters, volumes: $volumes, averageScore: $averageScore)';
+  return 'Media(id: $id, title: $title, episodes: $episodes, averageScore: $averageScore, coverImage: $coverImage, chapters: $chapters, volumes: $volumes)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $MediaCopyWith<$Res>  {
   factory $MediaCopyWith(Media value, $Res Function(Media) _then) = _$MediaCopyWithImpl;
 @useResult
 $Res call({
- int? id, Title? title, CoverImage? coverImage, dynamic chapters, dynamic volumes, int? averageScore
+ int? id, Title? title, int? episodes, int? averageScore, CoverImage? coverImage, dynamic chapters, dynamic volumes
 });
 
 
@@ -65,15 +65,16 @@ class _$MediaCopyWithImpl<$Res>
 
 /// Create a copy of Media
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? title = freezed,Object? coverImage = freezed,Object? chapters = freezed,Object? volumes = freezed,Object? averageScore = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? title = freezed,Object? episodes = freezed,Object? averageScore = freezed,Object? coverImage = freezed,Object? chapters = freezed,Object? volumes = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as Title?,coverImage: freezed == coverImage ? _self.coverImage : coverImage // ignore: cast_nullable_to_non_nullable
+as Title?,episodes: freezed == episodes ? _self.episodes : episodes // ignore: cast_nullable_to_non_nullable
+as int?,averageScore: freezed == averageScore ? _self.averageScore : averageScore // ignore: cast_nullable_to_non_nullable
+as int?,coverImage: freezed == coverImage ? _self.coverImage : coverImage // ignore: cast_nullable_to_non_nullable
 as CoverImage?,chapters: freezed == chapters ? _self.chapters : chapters // ignore: cast_nullable_to_non_nullable
 as dynamic,volumes: freezed == volumes ? _self.volumes : volumes // ignore: cast_nullable_to_non_nullable
-as dynamic,averageScore: freezed == averageScore ? _self.averageScore : averageScore // ignore: cast_nullable_to_non_nullable
-as int?,
+as dynamic,
   ));
 }
 /// Create a copy of Media
@@ -179,10 +180,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  Title? title,  CoverImage? coverImage,  dynamic chapters,  dynamic volumes,  int? averageScore)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  Title? title,  int? episodes,  int? averageScore,  CoverImage? coverImage,  dynamic chapters,  dynamic volumes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Media() when $default != null:
-return $default(_that.id,_that.title,_that.coverImage,_that.chapters,_that.volumes,_that.averageScore);case _:
+return $default(_that.id,_that.title,_that.episodes,_that.averageScore,_that.coverImage,_that.chapters,_that.volumes);case _:
   return orElse();
 
 }
@@ -200,10 +201,10 @@ return $default(_that.id,_that.title,_that.coverImage,_that.chapters,_that.volum
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  Title? title,  CoverImage? coverImage,  dynamic chapters,  dynamic volumes,  int? averageScore)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  Title? title,  int? episodes,  int? averageScore,  CoverImage? coverImage,  dynamic chapters,  dynamic volumes)  $default,) {final _that = this;
 switch (_that) {
 case _Media():
-return $default(_that.id,_that.title,_that.coverImage,_that.chapters,_that.volumes,_that.averageScore);}
+return $default(_that.id,_that.title,_that.episodes,_that.averageScore,_that.coverImage,_that.chapters,_that.volumes);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -217,10 +218,10 @@ return $default(_that.id,_that.title,_that.coverImage,_that.chapters,_that.volum
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  Title? title,  CoverImage? coverImage,  dynamic chapters,  dynamic volumes,  int? averageScore)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  Title? title,  int? episodes,  int? averageScore,  CoverImage? coverImage,  dynamic chapters,  dynamic volumes)?  $default,) {final _that = this;
 switch (_that) {
 case _Media() when $default != null:
-return $default(_that.id,_that.title,_that.coverImage,_that.chapters,_that.volumes,_that.averageScore);case _:
+return $default(_that.id,_that.title,_that.episodes,_that.averageScore,_that.coverImage,_that.chapters,_that.volumes);case _:
   return null;
 
 }
@@ -232,15 +233,16 @@ return $default(_that.id,_that.title,_that.coverImage,_that.chapters,_that.volum
 @JsonSerializable()
 
 class _Media implements Media {
-  const _Media({this.id, this.title, this.coverImage, this.chapters, this.volumes, this.averageScore});
+  const _Media({this.id, this.title, this.episodes, this.averageScore, this.coverImage, this.chapters, this.volumes});
   factory _Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 
 @override final  int? id;
 @override final  Title? title;
+@override final  int? episodes;
+@override final  int? averageScore;
 @override final  CoverImage? coverImage;
 @override final  dynamic chapters;
 @override final  dynamic volumes;
-@override final  int? averageScore;
 
 /// Create a copy of Media
 /// with the given fields replaced by the non-null parameter values.
@@ -255,16 +257,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Media&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.coverImage, coverImage) || other.coverImage == coverImage)&&const DeepCollectionEquality().equals(other.chapters, chapters)&&const DeepCollectionEquality().equals(other.volumes, volumes)&&(identical(other.averageScore, averageScore) || other.averageScore == averageScore));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Media&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.episodes, episodes) || other.episodes == episodes)&&(identical(other.averageScore, averageScore) || other.averageScore == averageScore)&&(identical(other.coverImage, coverImage) || other.coverImage == coverImage)&&const DeepCollectionEquality().equals(other.chapters, chapters)&&const DeepCollectionEquality().equals(other.volumes, volumes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,coverImage,const DeepCollectionEquality().hash(chapters),const DeepCollectionEquality().hash(volumes),averageScore);
+int get hashCode => Object.hash(runtimeType,id,title,episodes,averageScore,coverImage,const DeepCollectionEquality().hash(chapters),const DeepCollectionEquality().hash(volumes));
 
 @override
 String toString() {
-  return 'Media(id: $id, title: $title, coverImage: $coverImage, chapters: $chapters, volumes: $volumes, averageScore: $averageScore)';
+  return 'Media(id: $id, title: $title, episodes: $episodes, averageScore: $averageScore, coverImage: $coverImage, chapters: $chapters, volumes: $volumes)';
 }
 
 
@@ -275,7 +277,7 @@ abstract mixin class _$MediaCopyWith<$Res> implements $MediaCopyWith<$Res> {
   factory _$MediaCopyWith(_Media value, $Res Function(_Media) _then) = __$MediaCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, Title? title, CoverImage? coverImage, dynamic chapters, dynamic volumes, int? averageScore
+ int? id, Title? title, int? episodes, int? averageScore, CoverImage? coverImage, dynamic chapters, dynamic volumes
 });
 
 
@@ -292,15 +294,16 @@ class __$MediaCopyWithImpl<$Res>
 
 /// Create a copy of Media
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? title = freezed,Object? coverImage = freezed,Object? chapters = freezed,Object? volumes = freezed,Object? averageScore = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? title = freezed,Object? episodes = freezed,Object? averageScore = freezed,Object? coverImage = freezed,Object? chapters = freezed,Object? volumes = freezed,}) {
   return _then(_Media(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as Title?,coverImage: freezed == coverImage ? _self.coverImage : coverImage // ignore: cast_nullable_to_non_nullable
+as Title?,episodes: freezed == episodes ? _self.episodes : episodes // ignore: cast_nullable_to_non_nullable
+as int?,averageScore: freezed == averageScore ? _self.averageScore : averageScore // ignore: cast_nullable_to_non_nullable
+as int?,coverImage: freezed == coverImage ? _self.coverImage : coverImage // ignore: cast_nullable_to_non_nullable
 as CoverImage?,chapters: freezed == chapters ? _self.chapters : chapters // ignore: cast_nullable_to_non_nullable
 as dynamic,volumes: freezed == volumes ? _self.volumes : volumes // ignore: cast_nullable_to_non_nullable
-as dynamic,averageScore: freezed == averageScore ? _self.averageScore : averageScore // ignore: cast_nullable_to_non_nullable
-as int?,
+as dynamic,
   ));
 }
 

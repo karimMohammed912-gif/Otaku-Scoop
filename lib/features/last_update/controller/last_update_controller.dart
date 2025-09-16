@@ -1,26 +1,25 @@
-import 'dart:developer' as dev;
+
+
+
+
+
+import 'dart:developer';
 
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:otaku_scope/core/models/media.dart';
-import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/errors/failure.dart';
+import 'package:otaku_scope/core/models/media.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-import 'package:otaku_scope/features/top_anime/repo/top_anime_repo.dart';
+import 'package:otaku_scope/features/last_update/repo/last_update_repo.dart';
 
-
-
-
-
-class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
-  final TopAnimeRepo _repo;
-  final TopAnimeCategory _category;
+class LastUpdateNotifier extends StateNotifier<PaginatedState<Media>> {
+  final  LastUpdateRepo _repo;
   DateTime _lastLoadAt = DateTime.fromMillisecondsSinceEpoch(0);
   DateTime? _nextAllowedRequestAt;
   static const Duration _minIntervalBetweenLoads = Duration(seconds: 1);
 
   // FIX: This line is CRITICAL. It must call the stati%%%%c generic factory.
-  TopAnimeNotifier(this._repo, this._category) : super(PaginatedState.initial<Media>());
+  LastUpdateNotifier(this._repo,) : super(PaginatedState.initial<Media>());
 
   Future<void> loadFirstPage() async {
     if (state.isLoading || state.isLoadingMore) return;
@@ -28,10 +27,10 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
     // This line will now work because `state` is PaginatedState<Media>
     state = state.copyWith(isLoading: true, error: null); 
 
-    final result = await _repo.fetchTopAnime(page: 1, category: _category);
+    final result = await _repo.fetchLastUpdate(page: 1);
     result.when(
       success: (data) {
-        dev.log("data from provider ${data.toString()}");
+       log("data from provider ${data.toString()}");
         // Ensure unique items by id on first page as well
         final incoming = data.page?.media ?? const [];
         final seen = <int>{};
@@ -74,10 +73,8 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
     // Calculate the next page value
     final nextPage = (state.currentPage) + 1;
 
-    // FIX: Pass the category to the repository method
-    final result = await _repo.fetchTopAnime(
+    final result = await _repo.fetchLastUpdate(
       page: nextPage,
-      category: _category,
     );
     result.when(
       success: (data) {

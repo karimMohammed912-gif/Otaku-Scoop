@@ -121,7 +121,8 @@ class Querys {
   String getLatestUpdateQuery( int page) {
     return '''query {
   Page(perPage: 10, page: $page) {
-    media(sort: UPDATED_AT_DESC, type: ANIME) {
+   media(sort: TRENDING_DESC, type: ANIME, status: RELEASING)
+         {
       id
       title {
         romaji
@@ -165,10 +166,10 @@ class Querys {
 ''';
   }
 
-  String getRecommendationAnimeQuery(int id) {
+  String getRecommendationAnimeQuery(int id, int page) {
     return '''query {
-  Media(id: $id, type: ANIME) {
-    recommendations (sort: RATING_DESC, perPage: 10) {
+  Media(id: $id, type: ANIME, page: $page) {
+    recommendations (sort: RATING_DESC, perPage: 50) {
       edges {
         node {
           mediaRecommendation {

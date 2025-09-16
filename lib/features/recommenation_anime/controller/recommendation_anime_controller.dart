@@ -6,21 +6,20 @@ import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/errors/failure.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-import 'package:otaku_scope/features/top_anime/repo/top_anime_repo.dart';
+import 'package:otaku_scope/features/recommenation_anime/repo/recommend_anime_repo.dart';
 
 
 
 
+class RecommendAnimeController extends StateNotifier<PaginatedState<Media>> {
+  final RecommendAnimeRepo _repo;
 
-class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
-  final TopAnimeRepo _repo;
-  final TopAnimeCategory _category;
   DateTime _lastLoadAt = DateTime.fromMillisecondsSinceEpoch(0);
   DateTime? _nextAllowedRequestAt;
   static const Duration _minIntervalBetweenLoads = Duration(seconds: 1);
 
   // FIX: This line is CRITICAL. It must call the stati%%%%c generic factory.
-  TopAnimeNotifier(this._repo, this._category) : super(PaginatedState.initial<Media>());
+  RecommendAnimeController(this._repo) : super(PaginatedState.initial<Media>());
 
   Future<void> loadFirstPage() async {
     if (state.isLoading || state.isLoadingMore) return;
@@ -28,7 +27,7 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
     // This line will now work because `state` is PaginatedState<Media>
     state = state.copyWith(isLoading: true, error: null); 
 
-    final result = await _repo.fetchTopAnime(page: 1, category: _category);
+    final result = await _repo.fetchRecommendationAnime(page: 1);
     result.when(
       success: (data) {
         dev.log("data from provider ${data.toString()}");
@@ -75,9 +74,9 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
     final nextPage = (state.currentPage) + 1;
 
     // FIX: Pass the category to the repository method
-    final result = await _repo.fetchTopAnime(
+    final result = await _repo.fetchRecommendationAnime(
       page: nextPage,
-      category: _category,
+
     );
     result.when(
       success: (data) {

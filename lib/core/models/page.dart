@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:otaku_scope/features/top_anime/models/page_info.dart';
+import 'package:otaku_scope/core/models/page_info.dart';
 
 import 'media.dart';
 

@@ -4,7 +4,7 @@ import 'package:otaku_scope/core/widgets/custom_drawer.dart';
 import 'package:otaku_scope/features/anime_details/view/details_view.dart';
 import 'package:otaku_scope/features/last_update/view/last_update_view.dart';
 import 'package:otaku_scope/features/onbardingFeature/onbarding_view.dart';
-import 'package:otaku_scope/features/recommination_anime/view/recommendation_anime_view.dart';
+import 'package:otaku_scope/features/recommenation_anime/view/recommendation_anime_view.dart';
 import 'package:otaku_scope/features/sesonal_anime/view/sesonal_anime_view.dart';
 import 'package:otaku_scope/features/top_anime/view/top_anime_view.dart';
 

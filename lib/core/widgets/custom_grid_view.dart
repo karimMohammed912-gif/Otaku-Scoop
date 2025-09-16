@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/widgets/grid_item_widget.dart';
-import 'package:otaku_scope/features/top_anime/models/media.dart';
+import 'package:otaku_scope/core/models/media.dart';
 
 class CustomGridView<T extends StateNotifier<PaginatedState<Media>>>
     extends ConsumerStatefulWidget {
