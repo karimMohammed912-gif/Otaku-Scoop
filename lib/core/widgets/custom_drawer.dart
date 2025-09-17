@@ -67,7 +67,10 @@ class AnimeDrawerItems extends StatelessWidget {
         DrawerItem(
           icon: FontAwesomeIcons.magnifyingGlass,
           title: "search",
-          ontap: () {},
+          ontap: () {
+            context.go('/search');
+            Navigator.of(context).pop();
+          },
         ),
 
        

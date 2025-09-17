@@ -263,8 +263,8 @@ class Querys {
   String getSearchQuery(  { required String search,required int page,} ) {
 
     return '''query  {
-  Page(perPage: 10, page: 1) {
-    media(search: "att", type: ANIME) {
+  Page(perPage: 50, page: $page) {
+    media(search: "$search", isAdult: false, type: ANIME, sort: POPULARITY_DESC) {
       id
       title {
         romaji

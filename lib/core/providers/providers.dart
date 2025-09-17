@@ -15,6 +15,8 @@ import 'package:otaku_scope/features/top_anime/controller/top_anime_provider.dar
 import 'package:otaku_scope/features/top_anime/repo/top_anime_repo.dart';
 import 'package:otaku_scope/features/top_manga/controller/top_manga_controller.dart';
 import 'package:otaku_scope/features/top_manga/repo/top_manga_repo.dart';
+import 'package:otaku_scope/features/search/repo/search_repo.dart';
+import 'package:otaku_scope/features/search/controller/search_controller.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio();
@@ -83,4 +85,13 @@ final lastUpdateMangaNotifierProvider =
     StateNotifierProvider<LastUpdateMangaController, PaginatedState<Media>>((ref) {
   final repo = ref.watch(lastUpdateMangaRepoProvider);
   return LastUpdateMangaController(repo);
+});
+
+final searchRepoProvider = Provider((ref) {
+  return SearchRepo(ref.watch(graphQLServiceProvider));
+});
+
+final searchNotifierProvider = StateNotifierProvider<SearchController, PaginatedState<Media>>((ref) {
+  final repo = ref.watch(searchRepoProvider);
+  return SearchController(repo);
 });

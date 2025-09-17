@@ -9,6 +9,7 @@ import 'package:otaku_scope/features/recommenation_anime/view/recommendation_ani
 import 'package:otaku_scope/features/sesonal_anime/view/sesonal_anime_view.dart';
 import 'package:otaku_scope/features/top_anime/view/top_anime_view.dart';
 import 'package:otaku_scope/features/top_manga/view/top_manga_view.dart';
+import 'package:otaku_scope/features/search/view/search_view.dart';
 
 // Navigator keys
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -57,6 +58,11 @@ final GoRouter routerConfig = GoRouter(
           name: 'Recommendation Anime',
           path: '/recommendation',
           builder: (context, state) => const RecommendationAnimeView(),
+        ),
+        GoRoute(
+          name: 'Search',
+          path: '/search',
+          builder: (context, state) => const SearchView(),
         ),
         GoRoute(path:"/latest-manga", name: "Latest Manga", builder: (context, state) => const LastUpdateMangaView(),),
       ],
