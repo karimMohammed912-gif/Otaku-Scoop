@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:otaku_scope/core/providers/providers.dart';
+import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/widgets/custom_grid_view.dart';
 
 class SeasonalView extends ConsumerWidget {
@@ -7,7 +9,7 @@ class SeasonalView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabs = ['Winter', 'Spring', 'Summer', 'Fall'];
+    final List<String> tabs = SeasonsCategory.values.map((e) => e.name.toUpperCase()).toList();
     return DefaultTabController(
     
       length: tabs.length,
@@ -20,12 +22,22 @@ class SeasonalView extends ConsumerWidget {
             TabBar(tabs: tabs.map((e) => Tab(text: e)).toList()),
             Expanded(
               child: TabBarView(
-                children: tabs
-                    .map((e) => Padding(
-                      padding: const EdgeInsets.symmetric( horizontal:  8.0),
-                      child: const CustomGridView(),
-                    )) // Replace with your actual content widgets
-                    .toList(),
+                children: [
+                  CustomGridView(
+                    provider: seasonalAnimeNotifierProvider(SeasonsCategory.winter.name.toUpperCase()),
+                  ),
+                  CustomGridView(
+                    provider: seasonalAnimeNotifierProvider( SeasonsCategory.spring.name.toUpperCase() ,
+                  ),
+                  ),
+                  CustomGridView(
+                    provider: seasonalAnimeNotifierProvider(SeasonsCategory.summer.name.toUpperCase()),
+                  ),
+                  CustomGridView(
+                    provider: seasonalAnimeNotifierProvider(SeasonsCategory.fall.name.toUpperCase()),
+                  ),
+                  
+                ]
               ),
             ),
           ],

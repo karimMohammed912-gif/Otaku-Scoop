@@ -93,8 +93,8 @@ class Querys {
   }
   String getSeasonalAnimeQuery(int page, {required String season}) {
     return '''query {
-  Page(perPage: 10, page: 1) {
-    media(season: $season, seasonYear: 2025, type: ANIME, sort: POPULARITY_DESC) {
+  Page(perPage: 50, page: $page) {
+    media(season: $season,isAdult: false, seasonYear: ${DateTime.now().year}, type: ANIME, sort: POPULARITY_DESC) {
       id
       title {
         romaji
@@ -120,8 +120,8 @@ class Querys {
 
   String getLatestUpdateQuery( int page) {
     return '''query {
-  Page(perPage: 10, page: $page) {
-   media(sort: TRENDING_DESC, type: ANIME, status: RELEASING)
+  Page(perPage: 50, page: $page) {
+   media(sort: EPISODES, type: ANIME, status: RELEASING,isAdult: false, seasonYear: 2025)
          {
       id
       title {
