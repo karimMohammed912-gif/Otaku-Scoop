@@ -9,7 +9,9 @@ class TopAnimeView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabs = TopAnimeCategory.values.map((e) => e.name.toUpperCase()).toList();
+    final tabs = TopAnimeCategory.values
+        .map((e) => e.name.toUpperCase())
+        .toList();
 
     return DefaultTabController(
       initialIndex: 1,
@@ -22,9 +24,17 @@ class TopAnimeView extends ConsumerWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  CustomGridView(provider: topAnimeNotifierProvider(TopAnimeCategory.movies)),
-                  CustomGridView(provider: topAnimeNotifierProvider(TopAnimeCategory.tv)),
-                  CustomGridView(provider: topAnimeNotifierProvider(TopAnimeCategory.upcoming)),
+                  CustomGridView(
+                    provider: topAnimeNotifierProvider(TopAnimeCategory.movies),
+                  ),
+                  CustomGridView(
+                    provider: topAnimeNotifierProvider(TopAnimeCategory.tv),
+                  ),
+                  CustomGridView(
+                    provider: topAnimeNotifierProvider(
+                      TopAnimeCategory.upcoming,
+                    ),
+                  ),
                 ],
               ),
             ),

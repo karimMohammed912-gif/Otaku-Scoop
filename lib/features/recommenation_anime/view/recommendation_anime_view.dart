@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:otaku_scope/core/widgets/custom_grid_view.dart';
 

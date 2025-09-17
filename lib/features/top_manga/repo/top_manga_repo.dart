@@ -12,7 +12,7 @@ class TopMangaRepo extends BaseRepo {
     required TopMangaCategory category,
     int perPage = 50,
   }) async {
-    var query = Querys().getTopMangaQuery( page: page, category: category );
+    var query = Querys().getTopMangaQuery(page: page, category: category);
 
     return request<Data>(query: query, parser: (json) => Data.fromJson(json));
   }

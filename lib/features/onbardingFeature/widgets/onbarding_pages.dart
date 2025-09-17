@@ -14,14 +14,13 @@ class OnboardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(
-            page.image,
-            height: 300,
-          ),
+          Image.asset(page.image, height: 300),
           const SizedBox(height: 48),
           Text(
             page.title,
-            style: textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+            style: textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),

@@ -10,7 +10,6 @@ final currentPageProvider = StateProvider<int>((ref) => 0);
 
 final List<OnboardingPageModel> onboardingPages = [
   OnboardingPageModel(
-
     title: 'Welcome to Otaku Scope!',
     description:
         'Discover, track, and share your favorite anime and manga. All in one place.',
@@ -59,8 +58,9 @@ class OnboardingView extends ConsumerWidget {
                     ),
                   )
                 else
-                  const SizedBox(height: 48), // Placeholder for consistent height
-
+                  const SizedBox(
+                    height: 48,
+                  ), // Placeholder for consistent height
                 // PageView for onboarding content
                 Expanded(
                   child: PageView.builder(
@@ -85,9 +85,8 @@ class OnboardingView extends ConsumerWidget {
                       Row(
                         children: List.generate(
                           onboardingPages.length,
-                          (index) => PageIndicator(
-                            isActive: index == currentPage,
-                          ),
+                          (index) =>
+                              PageIndicator(isActive: index == currentPage),
                         ),
                       ),
 
@@ -114,7 +113,6 @@ class OnboardingView extends ConsumerWidget {
                         ),
                       ),
                     ],
-                    
                   ),
                 ),
               ],

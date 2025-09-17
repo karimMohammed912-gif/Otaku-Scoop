@@ -1,4 +1,3 @@
-
 import 'package:otaku_scope/core/utils/enums.dart';
 
 class Querys {
@@ -51,9 +50,11 @@ class Querys {
 ''';
   }
 
-   String getTopAnimeQuery({required int perPage,required int page, required TopAnimeCategory category}) {
-
-    
+  String getTopAnimeQuery({
+    required int perPage,
+    required int page,
+    required TopAnimeCategory category,
+  }) {
     String categoryFilter;
     String sort = 'POPULARITY_DESC';
     switch (category) {
@@ -91,6 +92,7 @@ class Querys {
 }
   ''';
   }
+
   String getSeasonalAnimeQuery(int page, {required String season}) {
     return '''query {
   Page(perPage: 50, page: $page) {
@@ -118,7 +120,7 @@ class Querys {
 ''';
   }
 
-  String getLatestUpdateQuery( int page) {
+  String getLatestUpdateQuery(int page) {
     return '''query {
   Page(perPage: 50, page: $page) {
    media(sort: EPISODES, type: ANIME, status: RELEASING,isAdult: false, seasonYear: 2025)
@@ -145,9 +147,7 @@ class Querys {
 }''';
   }
 
-
-    String getAnimeTrendingQuery( int page) {
-
+  String getAnimeTrendingQuery(int page) {
     return '''query {
   Page(perPage: 10, page: $page) {
     media(sort: TRENDING_DESC, type: ANIME) {
@@ -190,9 +190,10 @@ class Querys {
 }''';
   }
 
-
- String getTopMangaQuery( {required int page, required TopMangaCategory category}) {
-
+  String getTopMangaQuery({
+    required int page,
+    required TopMangaCategory category,
+  }) {
     String categoryFilter;
 
     switch (category) {
@@ -202,7 +203,6 @@ class Querys {
       case TopMangaCategory.novels:
         categoryFilter = 'format: NOVEL';
 
-      
         break;
     }
     return '''query {
@@ -256,12 +256,9 @@ class Querys {
   }
 }
 ''';
-
   }
-  
-  
-  String getSearchQuery(  { required String search,required int page,} ) {
 
+  String getSearchQuery({required String search, required int page}) {
     return '''query  {
   Page(perPage: 50, page: $page) {
     media(search: "$search", isAdult: false, type: ANIME, sort: POPULARITY_DESC) {

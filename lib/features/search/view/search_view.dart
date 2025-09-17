@@ -33,7 +33,10 @@ class _SearchViewState extends ConsumerState<SearchView> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12.0,
+              vertical: 8.0,
+            ),
             child: TextField(
               controller: _controller,
               textInputAction: TextInputAction.search,
@@ -47,9 +50,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
               onSubmitted: _onSubmitted,
             ),
           ),
-          Expanded(
-            child: _buildBody(state),
-          ),
+          Expanded(child: _buildBody(state)),
         ],
       ),
     );
@@ -60,12 +61,12 @@ class _SearchViewState extends ConsumerState<SearchView> {
       // Reuse grid with empty provider to keep UI consistent
       return const Center(child: CircularProgressIndicator());
     }
-    if (!state.isLoading && state.items.isEmpty && _controller.text.trim().isNotEmpty) {
+    if (!state.isLoading &&
+        state.items.isEmpty &&
+        _controller.text.trim().isNotEmpty) {
       return const Center(child: Text('No results'));
     }
 
     return CustomGridView(provider: searchNotifierProvider);
   }
 }
-
-

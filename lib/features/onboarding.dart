@@ -73,8 +73,9 @@ class OnboardingView extends ConsumerWidget {
                     ),
                   )
                 else
-                  const SizedBox(height: 48), // Placeholder for consistent height
-
+                  const SizedBox(
+                    height: 48,
+                  ), // Placeholder for consistent height
                 // PageView for onboarding content
                 Expanded(
                   child: PageView.builder(
@@ -99,9 +100,8 @@ class OnboardingView extends ConsumerWidget {
                       Row(
                         children: List.generate(
                           onboardingPages.length,
-                          (index) => _PageIndicator(
-                            isActive: index == currentPage,
-                          ),
+                          (index) =>
+                              _PageIndicator(isActive: index == currentPage),
                         ),
                       ),
 
@@ -160,7 +160,9 @@ class _OnboardingPage extends StatelessWidget {
           const SizedBox(height: 48),
           Text(
             page.title,
-            style: textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+            style: textTheme.headlineMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -202,8 +204,8 @@ class _BackgroundShapes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ColorScheme colorScheme = Theme.of(context).colorScheme; 
-    
+    // ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     final colorScheme = Theme.of(context).colorScheme;
     return Stack(
       children: [

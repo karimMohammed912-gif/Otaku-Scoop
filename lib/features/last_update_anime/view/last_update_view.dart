@@ -6,11 +6,8 @@ import 'package:otaku_scope/core/widgets/custom_grid_view.dart';
 class LastUpdateView extends ConsumerWidget {
   const LastUpdateView({super.key});
 
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return CustomGridView(provider: lastUpdateNotifierProvider);
   }
 }

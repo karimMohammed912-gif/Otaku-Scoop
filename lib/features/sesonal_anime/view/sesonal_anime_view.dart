@@ -9,9 +9,10 @@ class SeasonalView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<String> tabs = SeasonsCategory.values.map((e) => e.name.toUpperCase()).toList();
+    final List<String> tabs = SeasonsCategory.values
+        .map((e) => e.name.toUpperCase())
+        .toList();
     return DefaultTabController(
-    
       length: tabs.length,
       child: Padding(
         padding: const EdgeInsets.only(
@@ -24,20 +25,26 @@ class SeasonalView extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   CustomGridView(
-                    provider: seasonalAnimeNotifierProvider(SeasonsCategory.winter.name.toUpperCase()),
+                    provider: seasonalAnimeNotifierProvider(
+                      SeasonsCategory.winter.name.toUpperCase(),
+                    ),
                   ),
                   CustomGridView(
-                    provider: seasonalAnimeNotifierProvider( SeasonsCategory.spring.name.toUpperCase() ,
-                  ),
-                  ),
-                  CustomGridView(
-                    provider: seasonalAnimeNotifierProvider(SeasonsCategory.summer.name.toUpperCase()),
+                    provider: seasonalAnimeNotifierProvider(
+                      SeasonsCategory.spring.name.toUpperCase(),
+                    ),
                   ),
                   CustomGridView(
-                    provider: seasonalAnimeNotifierProvider(SeasonsCategory.fall.name.toUpperCase()),
+                    provider: seasonalAnimeNotifierProvider(
+                      SeasonsCategory.summer.name.toUpperCase(),
+                    ),
                   ),
-                  
-                ]
+                  CustomGridView(
+                    provider: seasonalAnimeNotifierProvider(
+                      SeasonsCategory.fall.name.toUpperCase(),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

@@ -7,27 +7,25 @@ import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
 import 'package:otaku_scope/features/sesonal_anime/repo/seasonal_anime_repo.dart';
 
-
-
-
 class SeasonalAnimeController extends StateNotifier<PaginatedState<Media>> {
-  final SeasonalAnimeRepo  _repo;
-    final String season;
+  final SeasonalAnimeRepo _repo;
+  final String season;
 
   DateTime _lastLoadAt = DateTime.fromMillisecondsSinceEpoch(0);
   DateTime? _nextAllowedRequestAt;
   static const Duration _minIntervalBetweenLoads = Duration(seconds: 1);
 
   // FIX: This line is CRITICAL. It must call the stati%%%%c generic factory.
-  SeasonalAnimeController(this._repo, this.season) : super(PaginatedState.initial<Media>());
+  SeasonalAnimeController(this._repo, this.season)
+    : super(PaginatedState.initial<Media>());
 
   Future<void> loadFirstPage() async {
     if (state.isLoading || state.isLoadingMore) return;
     _nextAllowedRequestAt = null;
     // This line will now work because `state` is PaginatedState<Media>
-    state = state.copyWith(isLoading: true, error: null); 
+    state = state.copyWith(isLoading: true, error: null);
 
-    final result = await _repo.fetchSeasonalAnime(page: 1, season: season );
+    final result = await _repo.fetchSeasonalAnime(page: 1, season: season);
     result.when(
       success: (data) {
         dev.log("data from provider ${data.toString()}");
@@ -75,15 +73,18 @@ class SeasonalAnimeController extends StateNotifier<PaginatedState<Media>> {
 
     // FIX: Pass the category to the repository method
     final result = await _repo.fetchSeasonalAnime(
-      page: nextPage, season: season,
-
+      page: nextPage,
+      season: season,
     );
     result.when(
       success: (data) {
         // Merge with de-duplication by id
         final current = state.items;
         final incoming = data.page?.media ?? const [];
-        final seen = <int>{for (final m in current) if (m.id != null) m.id!};
+        final seen = <int>{
+          for (final m in current)
+            if (m.id != null) m.id!,
+        };
         final merged = <Media>[...current];
         for (final m in incoming) {
           final id = m.id;
@@ -92,7 +93,7 @@ class SeasonalAnimeController extends StateNotifier<PaginatedState<Media>> {
             merged.add(m);
           }
         }
-        
+
         state = state.copyWith(
           isLoadingMore: false,
           items: merged,
@@ -105,7 +106,9 @@ class SeasonalAnimeController extends StateNotifier<PaginatedState<Media>> {
         // Do not surface pagination errors to the full-screen UI
         // If rate limited, set a cooldown window before next request
         if (f is ServerFailure && f.statusCode == 429) {
-          _nextAllowedRequestAt = DateTime.now().add(const Duration(seconds: 15));
+          _nextAllowedRequestAt = DateTime.now().add(
+            const Duration(seconds: 15),
+          );
         }
         state = state.copyWith(isLoadingMore: false, error: null);
       },

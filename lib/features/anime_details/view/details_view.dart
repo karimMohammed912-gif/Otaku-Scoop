@@ -25,10 +25,7 @@ class AnimeDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        backgroundColor: Colors.black87,
-      ),
+      appBar: AppBar(title: Text(title), backgroundColor: Colors.black87),
       body: DefaultTabController(
         length: 2,
         child: Stack(
@@ -55,7 +52,7 @@ class AnimeDetailsView extends StatelessWidget {
                   final hPad = isWide ? 24.0 : 16.0;
                   final vPad = isWide ? 20.0 : 12.0;
                   final titleSize = isWide ? 24.0 : 20.0;
-      
+
                   return Padding(
                     padding: EdgeInsets.fromLTRB(hPad, vPad, hPad, 0),
                     child: Column(
@@ -161,10 +158,7 @@ class _CoverThumb extends StatelessWidget {
   final String imageUrl;
   final double width;
 
-  const _CoverThumb({
-    required this.imageUrl,
-    required this.width,
-  });
+  const _CoverThumb({required this.imageUrl, required this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -242,8 +236,9 @@ class _DetailsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle =
-        Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white);
+    final textStyle = Theme.of(
+      context,
+    ).textTheme.bodyMedium?.copyWith(color: Colors.white);
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -255,7 +250,10 @@ class _DetailsTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Genres', style: textStyle?.copyWith(fontWeight: FontWeight.w700)),
+              Text(
+                'Genres',
+                style: textStyle?.copyWith(fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: wrapSpacing,
@@ -263,8 +261,10 @@ class _DetailsTab extends StatelessWidget {
                 children: (genres.isEmpty ? ['Unknown'] : genres)
                     .map(
                       (g) => Container(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 6,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.white12,
                           borderRadius: BorderRadius.circular(16),
@@ -278,7 +278,10 @@ class _DetailsTab extends StatelessWidget {
                     .toList(),
               ),
               const SizedBox(height: 24),
-              Text('Details', style: textStyle?.copyWith(fontWeight: FontWeight.w700)),
+              Text(
+                'Details',
+                style: textStyle?.copyWith(fontWeight: FontWeight.w700),
+              ),
               const SizedBox(height: 8),
               Text(
                 'Episodes: $episodes\n'
@@ -299,33 +302,40 @@ class _EpisodesTab extends StatelessWidget {
   final int episodes;
   final int durationMinutes;
 
-  const _EpisodesTab({
-    required this.episodes,
-    required this.durationMinutes,
-  });
+  const _EpisodesTab({required this.episodes, required this.durationMinutes});
 
   @override
   Widget build(BuildContext context) {
     if (episodes <= 0) {
       return const Center(
-        child: Text('No episodes available', style: TextStyle(color: Colors.white70)),
+        child: Text(
+          'No episodes available',
+          style: TextStyle(color: Colors.white70),
+        ),
       );
     }
 
     return ListView.separated(
       padding: const EdgeInsets.only(top: 8, bottom: 16),
       itemCount: episodes,
-      separatorBuilder: (_, __) => const Divider(height: 1, color: Colors.white10),
+      separatorBuilder: (_, __) =>
+          const Divider(height: 1, color: Colors.white10),
       itemBuilder: (context, index) {
         final epNumber = index + 1;
         return ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 4,
+          ),
           leading: CircleAvatar(
             backgroundColor: Colors.white12,
             foregroundColor: Colors.white,
             child: Text('$epNumber'),
           ),
-          title: Text('Episode $epNumber', style: const TextStyle(color: Colors.white)),
+          title: Text(
+            'Episode $epNumber',
+            style: const TextStyle(color: Colors.white),
+          ),
           subtitle: Text(
             '$durationMinutes min',
             style: const TextStyle(color: Colors.white70),

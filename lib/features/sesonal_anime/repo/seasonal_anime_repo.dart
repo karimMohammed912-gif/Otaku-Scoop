@@ -13,8 +13,7 @@ class SeasonalAnimeRepo extends BaseRepo {
     int perPage = 50,
     required String season,
   }) async {
-
-    var query = Querys().getSeasonalAnimeQuery(page, season: season );
+    var query = Querys().getSeasonalAnimeQuery(page, season: season);
 
     return request<Data>(query: query, parser: (json) => Data.fromJson(json));
   }

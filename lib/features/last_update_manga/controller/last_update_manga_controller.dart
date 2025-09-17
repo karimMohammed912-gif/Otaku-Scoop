@@ -1,8 +1,3 @@
-
-
-
-
-
 import 'dart:developer';
 
 import 'package:flutter_riverpod/legacy.dart';
@@ -13,24 +8,25 @@ import 'package:otaku_scope/core/utils/result.dart';
 import 'package:otaku_scope/features/last_update_manga/repo/Last_update_manga_repo.dart';
 
 class LastUpdateMangaController extends StateNotifier<PaginatedState<Media>> {
-  final  LastUpdateMangaRepo _repo;
+  final LastUpdateMangaRepo _repo;
   DateTime _lastLoadAt = DateTime.fromMillisecondsSinceEpoch(0);
   DateTime? _nextAllowedRequestAt;
   static const Duration _minIntervalBetweenLoads = Duration(seconds: 1);
 
   // FIX: This line is CRITICAL. It must call the stati%%%%c generic factory.
-  LastUpdateMangaController(this._repo,) : super(PaginatedState.initial<Media>());
+  LastUpdateMangaController(this._repo)
+    : super(PaginatedState.initial<Media>());
 
   Future<void> loadFirstPage() async {
     if (state.isLoading || state.isLoadingMore) return;
     _nextAllowedRequestAt = null;
     // This line will now work because `state` is PaginatedState<Media>
-    state = state.copyWith(isLoading: true, error: null); 
+    state = state.copyWith(isLoading: true, error: null);
 
     final result = await _repo.fetchLastUpdateManga(page: 1);
     result.when(
       success: (data) {
-       log("data from provider ${data.toString()}");
+        log("data from provider ${data.toString()}");
         // Ensure unique items by id on first page as well
         final incoming = data.page?.media ?? const [];
         final seen = <int>{};
@@ -73,15 +69,16 @@ class LastUpdateMangaController extends StateNotifier<PaginatedState<Media>> {
     // Calculate the next page value
     final nextPage = (state.currentPage) + 1;
 
-    final result = await _repo.fetchLastUpdateManga(
-      page: nextPage,
-    );
+    final result = await _repo.fetchLastUpdateManga(page: nextPage);
     result.when(
       success: (data) {
         // Merge with de-duplication by id
         final current = state.items;
         final incoming = data.page?.media ?? const [];
-        final seen = <int>{for (final m in current) if (m.id != null) m.id!};
+        final seen = <int>{
+          for (final m in current)
+            if (m.id != null) m.id!,
+        };
         final merged = <Media>[...current];
         for (final m in incoming) {
           final id = m.id;
@@ -90,7 +87,7 @@ class LastUpdateMangaController extends StateNotifier<PaginatedState<Media>> {
             merged.add(m);
           }
         }
-        
+
         state = state.copyWith(
           isLoadingMore: false,
           items: merged,
@@ -103,7 +100,9 @@ class LastUpdateMangaController extends StateNotifier<PaginatedState<Media>> {
         // Do not surface pagination errors to the full-screen UI
         // If rate limited, set a cooldown window before next request
         if (f is ServerFailure && f.statusCode == 429) {
-          _nextAllowedRequestAt = DateTime.now().add(const Duration(seconds: 15));
+          _nextAllowedRequestAt = DateTime.now().add(
+            const Duration(seconds: 15),
+          );
         }
         state = state.copyWith(isLoadingMore: false, error: null);
       },

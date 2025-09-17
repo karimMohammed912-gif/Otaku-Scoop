@@ -8,10 +8,6 @@ import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
 import 'package:otaku_scope/features/top_anime/repo/top_anime_repo.dart';
 
-
-
-
-
 class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
   final TopAnimeRepo _repo;
   final TopAnimeCategory _category;
@@ -20,13 +16,14 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
   static const Duration _minIntervalBetweenLoads = Duration(seconds: 1);
 
   // FIX: This line is CRITICAL. It must call the stati%%%%c generic factory.
-  TopAnimeNotifier(this._repo, this._category) : super(PaginatedState.initial<Media>());
+  TopAnimeNotifier(this._repo, this._category)
+    : super(PaginatedState.initial<Media>());
 
   Future<void> loadFirstPage() async {
     if (state.isLoading || state.isLoadingMore) return;
     _nextAllowedRequestAt = null;
     // This line will now work because `state` is PaginatedState<Media>
-    state = state.copyWith(isLoading: true, error: null); 
+    state = state.copyWith(isLoading: true, error: null);
 
     final result = await _repo.fetchTopAnime(page: 1, category: _category);
     result.when(
@@ -84,7 +81,10 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
         // Merge with de-duplication by id
         final current = state.items;
         final incoming = data.page?.media ?? const [];
-        final seen = <int>{for (final m in current) if (m.id != null) m.id!};
+        final seen = <int>{
+          for (final m in current)
+            if (m.id != null) m.id!,
+        };
         final merged = <Media>[...current];
         for (final m in incoming) {
           final id = m.id;
@@ -93,7 +93,7 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
             merged.add(m);
           }
         }
-        
+
         state = state.copyWith(
           isLoadingMore: false,
           items: merged,
@@ -106,7 +106,9 @@ class TopAnimeNotifier extends StateNotifier<PaginatedState<Media>> {
         // Do not surface pagination errors to the full-screen UI
         // If rate limited, set a cooldown window before next request
         if (f is ServerFailure && f.statusCode == 429) {
-          _nextAllowedRequestAt = DateTime.now().add(const Duration(seconds: 15));
+          _nextAllowedRequestAt = DateTime.now().add(
+            const Duration(seconds: 15),
+          );
         }
         state = state.copyWith(isLoadingMore: false, error: null);
       },

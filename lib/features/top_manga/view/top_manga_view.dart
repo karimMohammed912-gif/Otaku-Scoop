@@ -9,7 +9,9 @@ class TopMangaView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabs = TopMangaCategory.values.map((e) => e.name.toUpperCase()).toList();
+    final tabs = TopMangaCategory.values
+        .map((e) => e.name.toUpperCase())
+        .toList();
 
     return DefaultTabController(
       initialIndex: 1,
@@ -22,8 +24,12 @@ class TopMangaView extends ConsumerWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  CustomGridView(provider: topMangaNotifierProvider(TopMangaCategory.manga)),
-                  CustomGridView(provider: topMangaNotifierProvider(TopMangaCategory.novels)),
+                  CustomGridView(
+                    provider: topMangaNotifierProvider(TopMangaCategory.manga),
+                  ),
+                  CustomGridView(
+                    provider: topMangaNotifierProvider(TopMangaCategory.novels),
+                  ),
                 ],
               ),
             ),

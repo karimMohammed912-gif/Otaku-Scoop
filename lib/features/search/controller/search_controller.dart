@@ -69,12 +69,18 @@ class SearchController extends StateNotifier<PaginatedState<Media>> {
     state = state.copyWith(isLoadingMore: true);
 
     final nextPage = (state.currentPage) + 1;
-    final result = await _repo.fetchSearch(search: _currentQuery, page: nextPage);
+    final result = await _repo.fetchSearch(
+      search: _currentQuery,
+      page: nextPage,
+    );
     result.when(
       success: (data) {
         final current = state.items;
         final incoming = data.page?.media ?? const [];
-        final seen = <int>{for (final m in current) if (m.id != null) m.id!};
+        final seen = <int>{
+          for (final m in current)
+            if (m.id != null) m.id!,
+        };
         final merged = <Media>[...current];
         for (final m in incoming) {
           final id = m.id;
@@ -94,7 +100,9 @@ class SearchController extends StateNotifier<PaginatedState<Media>> {
       },
       failure: (f) {
         if (f is ServerFailure && f.statusCode == 429) {
-          _nextAllowedRequestAt = DateTime.now().add(const Duration(seconds: 15));
+          _nextAllowedRequestAt = DateTime.now().add(
+            const Duration(seconds: 15),
+          );
         }
         state = state.copyWith(isLoadingMore: false, error: null);
       },
@@ -105,5 +113,3 @@ class SearchController extends StateNotifier<PaginatedState<Media>> {
     await loadFirstPage();
   }
 }
-
-

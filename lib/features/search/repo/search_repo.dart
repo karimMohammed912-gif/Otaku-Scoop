@@ -11,11 +11,6 @@ class SearchRepo extends BaseRepo {
     required int page,
   }) async {
     final query = Querys().getSearchQuery(search: search, page: page);
-    return request<Data>(
-      query: query,
-      parser: (json) => Data.fromJson(json),
-    );
+    return request<Data>(query: query, parser: (json) => Data.fromJson(json));
   }
 }
-
-
