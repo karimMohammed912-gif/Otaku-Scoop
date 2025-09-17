@@ -191,4 +191,69 @@ class Querys {
   }
 
 
+ String getTopMangaQuery( {required int page, required TopMangaCategory category}) {
+
+    String categoryFilter;
+
+    switch (category) {
+      case TopMangaCategory.manga:
+        categoryFilter = 'format: MANGA';
+        break;
+      case TopMangaCategory.novels:
+        categoryFilter = 'format: NOVEL';
+
+      
+        break;
+    }
+    return '''query {
+  Page(perPage: 50, page: $page) {
+    media(sort: TRENDING_DESC,isAdult: false, type: MANGA, $categoryFilter) {
+      id
+      title {
+        romaji
+        english
+      }
+      trending
+      coverImage {
+        large
+      }
+    }pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
+    }
+  }
 }
+''';
+  }
+
+  String getLatestMangaQuery(int page) {
+    return '''query {
+  Page(perPage: 50, page: $page) {
+    media(type: MANGA,isAdult: false, sort: UPDATED_AT_DESC) {
+      id
+      title {
+        romaji
+        english
+        native
+      }
+      coverImage {
+        large
+      }
+      updatedAt
+      status
+      chapters
+      volumes
+    }pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
+    }
+  }
+}
+''';
+  } }

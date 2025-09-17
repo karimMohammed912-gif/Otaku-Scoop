@@ -2,23 +2,24 @@ import 'dart:developer' as dev;
 
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:otaku_scope/core/models/media.dart';
+import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/errors/failure.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-import 'package:otaku_scope/features/recommenation_anime/repo/recommend_anime_repo.dart';
+import 'package:otaku_scope/features/top_manga/repo/top_manga_repo.dart';
 
 
 
 
-class RecommendAnimeController extends StateNotifier<PaginatedState<Media>> {
-  final RecommendAnimeRepo _repo;
-
+class  TopMangaNotifier extends StateNotifier<PaginatedState<Media>> {
+  final TopMangaRepo _repo;
+  final TopMangaCategory _category;
   DateTime _lastLoadAt = DateTime.fromMillisecondsSinceEpoch(0);
   DateTime? _nextAllowedRequestAt;
   static const Duration _minIntervalBetweenLoads = Duration(seconds: 1);
 
   // FIX: This line is CRITICAL. It must call the stati%%%%c generic factory.
-  RecommendAnimeController(this._repo) : super(PaginatedState.initial<Media>());
+    TopMangaNotifier(this._repo, this._category) : super(PaginatedState.initial<Media>());
 
   Future<void> loadFirstPage() async {
     if (state.isLoading || state.isLoadingMore) return;
@@ -26,7 +27,7 @@ class RecommendAnimeController extends StateNotifier<PaginatedState<Media>> {
     // This line will now work because `state` is PaginatedState<Media>
     state = state.copyWith(isLoading: true, error: null); 
 
-    final result = await _repo.fetchRecommendationAnime(page: 1);
+    final result = await _repo.fetchTopManga(page: 1, category: _category);
     result.when(
       success: (data) {
         dev.log("data from provider ${data.toString()}");
@@ -73,9 +74,9 @@ class RecommendAnimeController extends StateNotifier<PaginatedState<Media>> {
     final nextPage = (state.currentPage) + 1;
 
     // FIX: Pass the category to the repository method
-    final result = await _repo.fetchRecommendationAnime(
+    final result = await _repo.fetchTopManga(
       page: nextPage,
-
+      category: _category,
     );
     result.when(
       success: (data) {

@@ -11,3 +11,9 @@ enum SeasonsCategory {
   summer,
   fall,
 }
+
+enum TopMangaCategory {
+  manga,
+  novels,
+
+}

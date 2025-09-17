@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otaku_scope/core/widgets/custom_drawer.dart';
 import 'package:otaku_scope/features/anime_details/view/details_view.dart';
-import 'package:otaku_scope/features/last_update/view/last_update_view.dart';
+import 'package:otaku_scope/features/last_update_anime/view/last_update_view.dart';
+import 'package:otaku_scope/features/last_update_manga/view/last_update_manga_view.dart';
 import 'package:otaku_scope/features/onbardingFeature/onbarding_view.dart';
 import 'package:otaku_scope/features/recommenation_anime/view/recommendation_anime_view.dart';
 import 'package:otaku_scope/features/sesonal_anime/view/sesonal_anime_view.dart';
 import 'package:otaku_scope/features/top_anime/view/top_anime_view.dart';
+import 'package:otaku_scope/features/top_manga/view/top_manga_view.dart';
 
 // Navigator keys
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -47,10 +49,16 @@ final GoRouter routerConfig = GoRouter(
           builder: (context, state) => const LastUpdateView(),
         ),
         GoRoute(
+          path: '/top-manga',
+          name: 'Top Manga',
+          builder: (context, state) => const TopMangaView(),
+        ),
+        GoRoute(
           name: 'Recommendation Anime',
           path: '/recommendation',
           builder: (context, state) => const RecommendationAnimeView(),
         ),
+        GoRoute(path:"/latest-manga", name: "Latest Manga", builder: (context, state) => const LastUpdateMangaView(),),
       ],
     ),
 
@@ -76,8 +84,10 @@ final GoRouter routerConfig = GoRouter(
             averageScore: 92,
           ),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            final tween = Tween(begin: const Offset(1, 0), end: Offset.zero)
-                .chain(CurveTween(curve: Curves.easeOutCubic));
+            final tween = Tween(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).chain(CurveTween(curve: Curves.easeOutCubic));
             return SlideTransition(
               position: animation.drive(tween),
               child: child,

@@ -10,7 +10,7 @@ import 'package:otaku_scope/core/errors/failure.dart';
 import 'package:otaku_scope/core/models/media.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-import 'package:otaku_scope/features/last_update/repo/last_update_repo.dart';
+import 'package:otaku_scope/features/last_update_anime/repo/last_update_repo.dart';
 
 class LastUpdateNotifier extends StateNotifier<PaginatedState<Media>> {
   final  LastUpdateRepo _repo;

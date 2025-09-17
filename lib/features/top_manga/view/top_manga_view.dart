@@ -4,12 +4,12 @@ import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/widgets/custom_grid_view.dart';
 import 'package:otaku_scope/core/providers/providers.dart';
 
-class TopAnimeView extends ConsumerWidget {
-  const TopAnimeView({super.key});
+class TopMangaView extends ConsumerWidget {
+  const TopMangaView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabs = TopAnimeCategory.values.map((e) => e.name.toUpperCase()).toList();
+    final tabs = TopMangaCategory.values.map((e) => e.name.toUpperCase()).toList();
 
     return DefaultTabController(
       initialIndex: 1,
@@ -22,9 +22,8 @@ class TopAnimeView extends ConsumerWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  CustomGridView(provider: topAnimeNotifierProvider(TopAnimeCategory.movies)),
-                  CustomGridView(provider: topAnimeNotifierProvider(TopAnimeCategory.tv)),
-                  CustomGridView(provider: topAnimeNotifierProvider(TopAnimeCategory.upcoming)),
+                  CustomGridView(provider: topMangaNotifierProvider(TopMangaCategory.manga)),
+                  CustomGridView(provider: topMangaNotifierProvider(TopMangaCategory.novels)),
                 ],
               ),
             ),

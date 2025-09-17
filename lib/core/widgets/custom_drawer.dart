@@ -70,14 +70,7 @@ class AnimeDrawerItems extends StatelessWidget {
           ontap: () {},
         ),
 
-        DrawerItem(
-          icon: FontAwesomeIcons.shuffle,
-          title: 'Recommendation ',
-          ontap: () {
-            context.go('/recommendation');
-            Navigator.of(context).pop();
-          },
-        ),
+       
       ],
     );
   }
@@ -98,15 +91,24 @@ class MangaDrawerItems extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         const Divider(),
-
-        const DrawerItem(
+      DrawerItem(
+          icon: Icons.home,
+          title: 'Last Updated',
+          ontap: () {
+            context.go('/latest-manga');
+            Navigator.of(context).pop();
+          },
+        ),SizedBox(height: 10),
+         DrawerItem(
+          ontap: () {
+            context.go('/top-manga');
+            Navigator.of(context).pop();
+          },
           icon: FontAwesomeIcons.fireFlameCurved,
           title: 'Top Manga',
         ),
-        DrawerItem(
-          icon: FontAwesomeIcons.shuffle,
-          title: 'Recommendation Manga',
-        ),
+     
+  
       ],
     );
   }
