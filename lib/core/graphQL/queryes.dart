@@ -256,4 +256,35 @@ class Querys {
   }
 }
 ''';
-  } }
+
+  }
+  
+  
+  String getSearchQuery(  { required String search,required int page,} ) {
+
+    return '''query  {
+  Page(perPage: 10, page: 1) {
+    media(search: "att", type: ANIME) {
+      id
+      title {
+        romaji
+        english
+      }
+      coverImage {
+        large
+      }
+      episodes
+      averageScore
+    }
+    pageInfo {
+      total
+      perPage
+      lastPage
+      hasNextPage
+      currentPage
+    }
+  }
+}
+''';
+  }
+}
