@@ -8,9 +8,9 @@ import 'package:otaku_scope/features/details_feature/view/details_view.dart';
 import 'package:otaku_scope/features/details_feature/view/manga_details_view.dart';
 import 'package:otaku_scope/features/last_update_anime/view/last_update_view.dart';
 import 'package:otaku_scope/features/last_update_manga/view/last_update_manga_view.dart';
-import 'package:otaku_scope/features/onbardingFeature/onbarding_view.dart';
-import 'package:otaku_scope/features/recommenation_anime/view/recommendation_anime_view.dart';
-import 'package:otaku_scope/features/sesonal_anime/view/sesonal_anime_view.dart';
+import 'package:otaku_scope/features/onboardingFeature/onbarding_view.dart';
+import 'package:otaku_scope/features/recommendation_anime/view/recommendation_anime_view.dart';
+import 'package:otaku_scope/features/seasonal_anime/view/sesonal_anime_view.dart';
 import 'package:otaku_scope/features/top_manga/view/top_manga_view.dart';
 import 'package:otaku_scope/features/search/view/search_view.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:otaku_scope/core/providers/providers.dart';
-import 'package:otaku_scope/features/onbardingFeature/onbarding_view.dart';
+import 'package:otaku_scope/features/onboardingFeature/onbarding_view.dart';
 import 'package:otaku_scope/features/top_anime/view/top_anime_view.dart';
 
 class AppInitializer extends ConsumerWidget {
