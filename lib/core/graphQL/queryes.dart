@@ -1,10 +1,9 @@
 import 'package:otaku_scope/core/utils/enums.dart';
 
 class Querys {
-  String getAnimeDetailsQuery(int id) {
+  String getDetailsQuery({required int id, required String type}) {
     return '''query {
-  Media(id:$id, type: ANIME) {
-    
+  Media(id: $id, type: $type) {
     title {
       romaji
       english
@@ -13,20 +12,23 @@ class Querys {
       year
       month
       day
-    }endDate {
-      
-    
+    }
+    endDate {
       year
       month
       day
     }
     description(asHtml: false)
+    # Anime specific
     episodes
     duration
+    # Manga specific
+    chapters
+    volumes
+    # Common
     status
     genres
     averageScore
-    
     coverImage {
       large
     }
@@ -47,6 +49,7 @@ class Querys {
     }
   }
 }
+
 ''';
   }
 
@@ -145,25 +148,6 @@ class Querys {
     }
   }
 }''';
-  }
-
-  String getAnimeTrendingQuery(int page) {
-    return '''query {
-  Page(perPage: 10, page: $page) {
-    media(sort: TRENDING_DESC, type: ANIME) {
-      id
-      title {
-        romaji
-        english
-      }
-      trending
-      coverImage {
-        large
-      }
-    }
-  }
-}
-''';
   }
 
   String getRecommendationAnimeQuery(int id, int page) {
