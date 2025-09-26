@@ -63,7 +63,7 @@ dependencies:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/otaku_scope.git
+   git clone https://github.com/karimMohammed912-gif/Otaku-Scoop.git
    cd otaku_scope
    ```
 
