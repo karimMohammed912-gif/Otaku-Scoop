@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:otaku_scope/features/onbardingFeature/model/onbarding_model.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -14,8 +15,8 @@ class OnboardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(page.image, height: 300),
-          const SizedBox(height: 48),
+      Lottie.asset(page.image, height: 150,fit: BoxFit.cover),
+          const SizedBox(height: 10),
           Text(
             page.title,
             style: textTheme.headlineMedium?.copyWith(

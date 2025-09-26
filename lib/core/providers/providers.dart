@@ -5,10 +5,12 @@ import 'package:otaku_scope/core/graphQL/graphql_service.dart';
 import 'package:otaku_scope/core/models/media.dart';
 import 'package:otaku_scope/core/utils/enums.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
+import 'package:otaku_scope/core/utils/theme_mode_controller.dart';
 import 'package:otaku_scope/features/last_update_anime/controller/last_update_controller.dart';
 import 'package:otaku_scope/features/last_update_anime/repo/last_update_repo.dart';
 import 'package:otaku_scope/features/last_update_manga/controller/last_update_manga_controller.dart';
 import 'package:otaku_scope/features/last_update_manga/repo/Last_update_manga_repo.dart';
+import 'package:otaku_scope/features/onbardingFeature/controller/onboarding_controller.dart';
 import 'package:otaku_scope/features/sesonal_anime/controller/seasonal_anime_controller.dart';
 import 'package:otaku_scope/features/sesonal_anime/repo/seasonal_anime_repo.dart';
 import 'package:otaku_scope/features/top_anime/controller/top_anime_provider.dart';
@@ -17,6 +19,10 @@ import 'package:otaku_scope/features/top_manga/controller/top_manga_controller.d
 import 'package:otaku_scope/features/top_manga/repo/top_manga_repo.dart';
 import 'package:otaku_scope/features/search/repo/search_repo.dart';
 import 'package:otaku_scope/features/search/controller/search_controller.dart';
+import 'package:otaku_scope/features/details_feature/repo/details_repo.dart';
+import 'package:otaku_scope/features/details_feature/controller/anime_details_controller.dart';
+import 'package:otaku_scope/features/details_feature/controller/manga_details_controller.dart';
+import 'package:flutter/material.dart' as material;
 
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio();
@@ -94,4 +100,33 @@ final searchRepoProvider = Provider((ref) {
 final searchNotifierProvider = StateNotifierProvider<SearchController, PaginatedState<Media>>((ref) {
   final repo = ref.watch(searchRepoProvider);
   return SearchController(repo);
+});
+
+final animeDetailsRepoProvider = Provider((ref) {
+  return AnimeDetailsRepo(ref.watch(graphQLServiceProvider));
+});
+
+final animeDetailsNotifierProvider = StateNotifierProvider.family<AnimeDetailsController, AnimeDetailsState, int>((ref, int id) {
+  final repo = ref.watch(animeDetailsRepoProvider);
+  final controller = AnimeDetailsController(repo);
+  // Lazy load on first listen
+  Future.microtask(() => controller.load(id));
+  return controller;
+});
+
+final mangaDetailsNotifierProvider = StateNotifierProvider.family<MangaDetailsController, MangaDetailsState, int>((ref, int id) {
+  final repo = ref.watch(animeDetailsRepoProvider);
+  final controller = MangaDetailsController(repo);
+  // Lazy load on first listen
+  Future.microtask(() => controller.load(id));
+  return controller;
+});
+
+final themeModeProvider = StateNotifierProvider<ThemeModeController, material.ThemeMode>((ref) {
+  return ThemeModeController();
+});
+
+
+final onboardingControllerProvider = StateNotifierProvider<OnboardingController, bool>((ref) {
+  return OnboardingController();
 });

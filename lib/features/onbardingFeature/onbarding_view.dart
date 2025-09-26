@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:otaku_scope/core/providers/providers.dart';
 import 'package:otaku_scope/features/onbardingFeature/widgets/onbarding_pages.dart';
 import 'package:otaku_scope/features/onbardingFeature/widgets/page_indicator.dart';
 import 'package:go_router/go_router.dart';
@@ -13,19 +14,19 @@ final List<OnboardingPageModel> onboardingPages = [
     title: 'Welcome to Otaku Scope!',
     description:
         'Discover, track, and share your favorite anime and manga. All in one place.',
-    image: 'assets/images/onboarding1.png',
+    image: 'assets/images/onboarding1.json',
   ),
   OnboardingPageModel(
     title: 'Stay Updated',
     description:
         'Get notifications for new episodes and trending series. Never miss a beat.',
-    image: 'assets/images/onboarding2.png',
+    image: 'assets/images/onboarding2.json',
   ),
   OnboardingPageModel(
     title: 'Join the Community',
     description:
         'Connect with fellow fans, discuss your favorite shows, and share your reviews.',
-    image: 'assets/images/onboarding3.png',
+    image: 'assets/images/onboarding3.json',
   ),
 ];
 
@@ -37,8 +38,14 @@ class OnboardingView extends ConsumerWidget {
     final pageController = PageController();
     final currentPage = ref.watch(currentPageProvider);
 
-    void goToHome() {
-      GoRouter.of(context).go('/');
+    Future<void> goToHome() async {
+      // Mark onboarding as completed
+      await ref
+          .read(onboardingControllerProvider.notifier)
+          .completeOnboarding();
+      if (context.mounted) {
+        GoRouter.of(context).go('/');
+      }
     }
 
     return Scaffold(
