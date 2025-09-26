@@ -20,7 +20,7 @@ class _GraphQLService implements GraphQLService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<Map<String, dynamic>> sendQuery(Map<String, dynamic> body) async {
+  Future<Map<String, dynamic>> send(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -39,10 +39,7 @@ class _GraphQLService implements GraphQLService {
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late Map<String, dynamic> _value;
     try {
-      _value = _result.data!.map(
-        (k, dynamic v) =>
-            MapEntry(k, v),
-      );
+      _value = _result.data!;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

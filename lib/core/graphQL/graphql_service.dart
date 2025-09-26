@@ -7,7 +7,6 @@ part 'graphql_service.g.dart';
 abstract class GraphQLService {
   factory GraphQLService(Dio dio, {String baseUrl}) = _GraphQLService;
 
-  /// Send a GraphQL request
   @POST("/")
-  Future<Map<String, dynamic>> sendQuery(@Body() Map<String, dynamic> body);
+  Future<Map<String, dynamic>> send(@Body() Map<String, dynamic> body);
 }
