@@ -5,12 +5,18 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/widgets/grid_item_widget.dart';
 import 'package:otaku_scope/core/models/media.dart';
+import 'package:otaku_scope/core/utils/enums.dart';
 
 class CustomGridView<T extends StateNotifier<PaginatedState<Media>>>
     extends ConsumerStatefulWidget {
-  const CustomGridView({this.provider, super.key});
+  const CustomGridView({
+    this.provider,
+    this.mediaType = MediaType.anime,
+    super.key,
+  });
 
   final StateNotifierProvider<T, PaginatedState<Media>>? provider;
+  final MediaType mediaType;
 
   @override
   ConsumerState<CustomGridView> createState() => _CustomGridViewState();
@@ -20,10 +26,10 @@ class _CustomGridViewState extends ConsumerState<CustomGridView>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late AnimationController _animationController;
   late List<Animation<double>> _itemAnimations;
-    final ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
-  bool get wantKeepAlive => true ;
+  bool get wantKeepAlive => true;
   @override
   void initState() {
     super.initState();
@@ -38,8 +44,8 @@ class _CustomGridViewState extends ConsumerState<CustomGridView>
       duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
-
-    _scrollController.addListener(()  {
+    // add listener to the scroll controller for pagination
+    _scrollController.addListener(() {
       // Trigger loadMore when near the bottom
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 200) {
@@ -126,9 +132,7 @@ class _CustomGridViewState extends ConsumerState<CustomGridView>
         itemBuilder: (context, index) {
           // FIX: If this is the extra item, show a loading indicator
           if (index >= state.items.length) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           final animationIndex = index % _itemAnimations.length;
@@ -140,9 +144,12 @@ class _CustomGridViewState extends ConsumerState<CustomGridView>
                 animation: _itemAnimations[animationIndex],
                 child: GridItemWidget(
                   imageUrl: state.items[index].coverImage!.large ?? '',
-                  title: state.items[index].title!.english ??
+                  title:
+                      state.items[index].title!.english ??
                       state.items[index].title!.romaji ??
                       '',
+                  id: state.items[index].id,
+                  mediaType: widget.mediaType,
                 ),
               );
             },

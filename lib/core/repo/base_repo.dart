@@ -5,11 +5,12 @@ import 'package:dio/dio.dart';
 import 'package:otaku_scope/core/errors/failure.dart';
 import 'package:otaku_scope/core/graphQL/graphql_service.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-
+/// Base class for all repositories
 abstract class BaseRepo {
   final GraphQLService service;
   const BaseRepo(this.service);
 
+  /// Request data from the service
   Future<Result<T>> request<T>({
     required String query,
     required T Function(Map<String, dynamic> json) parser,

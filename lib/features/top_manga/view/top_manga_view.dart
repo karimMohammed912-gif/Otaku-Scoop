@@ -26,9 +26,11 @@ class TopMangaView extends ConsumerWidget {
                 children: [
                   CustomGridView(
                     provider: topMangaNotifierProvider(TopMangaCategory.manga),
+                    mediaType: MediaType.manga,
                   ),
                   CustomGridView(
                     provider: topMangaNotifierProvider(TopMangaCategory.novels),
+                    mediaType: MediaType.manga,
                   ),
                 ],
               ),

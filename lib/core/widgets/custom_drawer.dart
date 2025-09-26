@@ -72,8 +72,6 @@ class AnimeDrawerItems extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-
-       
       ],
     );
   }
@@ -94,15 +92,16 @@ class MangaDrawerItems extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         const Divider(),
-      DrawerItem(
+        DrawerItem(
           icon: Icons.home,
           title: 'Last Updated',
           ontap: () {
             context.go('/latest-manga');
             Navigator.of(context).pop();
           },
-        ),SizedBox(height: 10),
-         DrawerItem(
+        ),
+        SizedBox(height: 10),
+        DrawerItem(
           ontap: () {
             context.go('/top-manga');
             Navigator.of(context).pop();
@@ -110,8 +109,6 @@ class MangaDrawerItems extends StatelessWidget {
           icon: FontAwesomeIcons.fireFlameCurved,
           title: 'Top Manga',
         ),
-     
-  
       ],
     );
   }

@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:otaku_scope/core/graphQL/queryes.dart';
 import 'package:otaku_scope/core/repo/base_repo.dart';

@@ -3,20 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'package:otaku_scope/core/utils/enums.dart';
+
+
 class GridItemWidget extends StatelessWidget {
   const GridItemWidget({
     required this.imageUrl,
     required this.title,
+    required this.id,
+    this.mediaType = MediaType.anime,
     super.key,
   });
   final String? imageUrl;
   final String? title;
+  final int id;
+  final MediaType mediaType;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed('details');
+        final route = mediaType == MediaType.anime ? '/anime/$id' : '/manga/$id';
+        context.push(route);
         // Handle item tap
       },
       child: Padding(
