@@ -1,6 +1,6 @@
 name: otaku_scope
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -23,6 +23,7 @@ dependencies:
   hooks_riverpod: ^3.0.0-dev.17
   icons_launcher: ^3.0.1
   json_annotation: ^4.9.0
+  lottie: ^3.3.2
   retrofit: ^4.7.0
   riverpod: ^3.0.0-dev.17
   riverpod_annotation: ^3.0.0-dev.17
@@ -41,5 +42,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # assets:
-  #   - assets/images/
+  assets:
+    - assets/images/
