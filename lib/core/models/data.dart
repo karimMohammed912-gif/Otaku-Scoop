@@ -8,7 +8,7 @@ part 'data.g.dart';
 @freezed
 sealed class Data with _$Data {
   const factory Data({
-    // FIX: Add this annotation to map the JSON key 'Page' to this property.
+    
     @JsonKey(name: 'Page') Page? page,
   }) = _Data;
 
