@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:otaku_scope/features/onbardingFeature/model/onbarding_model.dart';
+import 'package:otaku_scope/features/onboardingFeature/model/onbarding_model.dart';
 
 class OnboardingPage extends StatelessWidget {
   final OnboardingPageModel page;

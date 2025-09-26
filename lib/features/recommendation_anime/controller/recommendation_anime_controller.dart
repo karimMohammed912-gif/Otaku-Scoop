@@ -5,19 +5,17 @@ import 'package:otaku_scope/core/models/media.dart';
 import 'package:otaku_scope/core/errors/failure.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-import 'package:otaku_scope/features/sesonal_anime/repo/seasonal_anime_repo.dart';
+import 'package:otaku_scope/features/recommendation_anime/repo/recommend_anime_repo.dart';
 
-class SeasonalAnimeController extends StateNotifier<PaginatedState<Media>> {
-  final SeasonalAnimeRepo _repo;
-  final String season;
+class RecommendAnimeController extends StateNotifier<PaginatedState<Media>> {
+  final RecommendAnimeRepo _repo;
 
   DateTime _lastLoadAt = DateTime.fromMillisecondsSinceEpoch(0);
   DateTime? _nextAllowedRequestAt;
   static const Duration _minIntervalBetweenLoads = Duration(seconds: 1);
 
   // FIX: This line is CRITICAL. It must call the stati%%%%c generic factory.
-  SeasonalAnimeController(this._repo, this.season)
-    : super(PaginatedState.initial<Media>());
+  RecommendAnimeController(this._repo) : super(PaginatedState.initial<Media>());
 
   Future<void> loadFirstPage() async {
     if (state.isLoading || state.isLoadingMore) return;
@@ -25,7 +23,7 @@ class SeasonalAnimeController extends StateNotifier<PaginatedState<Media>> {
     // This line will now work because `state` is PaginatedState<Media>
     state = state.copyWith(isLoading: true, error: null);
 
-    final result = await _repo.fetchSeasonalAnime(page: 1, season: season);
+    final result = await _repo.fetchRecommendationAnime(page: 1);
     result.when(
       success: (data) {
         dev.log("data from provider ${data.toString()}");
@@ -72,10 +70,7 @@ class SeasonalAnimeController extends StateNotifier<PaginatedState<Media>> {
     final nextPage = (state.currentPage) + 1;
 
     // FIX: Pass the category to the repository method
-    final result = await _repo.fetchSeasonalAnime(
-      page: nextPage,
-      season: season,
-    );
+    final result = await _repo.fetchRecommendationAnime(page: nextPage);
     result.when(
       success: (data) {
         // Merge with de-duplication by id

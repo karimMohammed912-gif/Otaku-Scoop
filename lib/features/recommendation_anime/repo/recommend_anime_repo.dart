@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:otaku_scope/core/graphQL/queryes.dart';
+import 'package:otaku_scope/core/graphQL/queries.dart';
 import 'package:otaku_scope/core/repo/base_repo.dart';
 import 'package:otaku_scope/core/utils/result.dart';
 import 'package:otaku_scope/core/models/data.dart';

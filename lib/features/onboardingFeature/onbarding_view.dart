@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:otaku_scope/core/providers/providers.dart';
-import 'package:otaku_scope/features/onbardingFeature/widgets/onbarding_pages.dart';
-import 'package:otaku_scope/features/onbardingFeature/widgets/page_indicator.dart';
+import 'package:otaku_scope/features/onboardingFeature/widgets/onbarding_pages.dart';
+import 'package:otaku_scope/features/onboardingFeature/widgets/page_indicator.dart';
 import 'package:go_router/go_router.dart';
-import 'package:otaku_scope/features/onbardingFeature/model/onbarding_model.dart';
+import 'package:otaku_scope/features/onboardingFeature/model/onbarding_model.dart';
 
 final currentPageProvider = StateProvider<int>((ref) => 0);
 
