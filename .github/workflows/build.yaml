@@ -26,9 +26,12 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk --release
 
+      - name: Rename APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/OtakuScope-v1.0.${{ github.run_number }}.apk
+
       - uses: ncipollo/release-action@v1
         with:
           tag: "v1.0.${{ github.run_number }}"
+          name: "OtakuScope v1.0.${{ github.run_number }}"
           artifacts: "build/app/outputs/flutter-apk/OtakuScope-v1.0.${{ github.run_number }}.apk"
-
           token: ${{ secrets.GITHUB_TOKEN }}
