@@ -5,7 +5,7 @@ import 'package:otaku_scope/core/errors/failure.dart';
 import 'package:otaku_scope/core/models/media.dart';
 import 'package:otaku_scope/core/utils/paginatin_state.dart';
 import 'package:otaku_scope/core/utils/result.dart';
-import 'package:otaku_scope/features/last_update_manga/repo/Last_update_manga_repo.dart';
+import 'package:otaku_scope/features/last_update_manga/repo/last_update_manga_repo.dart'; 
 
 class LastUpdateMangaController extends StateNotifier<PaginatedState<Media>> {
   final LastUpdateMangaRepo _repo;

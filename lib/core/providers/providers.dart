@@ -9,7 +9,7 @@ import 'package:otaku_scope/core/utils/theme_mode_controller.dart';
 import 'package:otaku_scope/features/last_update_anime/controller/last_update_controller.dart';
 import 'package:otaku_scope/features/last_update_anime/repo/last_update_repo.dart';
 import 'package:otaku_scope/features/last_update_manga/controller/last_update_manga_controller.dart';
-import 'package:otaku_scope/features/last_update_manga/repo/Last_update_manga_repo.dart';
+import 'package:otaku_scope/features/last_update_manga/repo/last_update_manga_repo.dart';
 import 'package:otaku_scope/features/onboardingFeature/controller/onboarding_controller.dart';
 import 'package:otaku_scope/features/seasonal_anime/controller/seasonal_anime_controller.dart';
 import 'package:otaku_scope/features/seasonal_anime/repo/seasonal_anime_repo.dart';
