@@ -13,19 +13,19 @@ final List<OnboardingPageModel> onboardingPages = [
   OnboardingPageModel(
     title: 'Welcome to Otaku Scope!',
     description:
-        'Discover, track, and share your favorite anime and manga. All in one place.',
+        'Your ultimate app for discovering and tracking anime and manga.',
     image: 'assets/images/onboarding1.json',
   ),
   OnboardingPageModel(
     title: 'Stay Updated',
     description:
-        'Get notifications for new episodes and trending series. Never miss a beat.',
+        'Get the latest news, updates, and recommendations to your tastes.',
     image: 'assets/images/onboarding2.json',
   ),
   OnboardingPageModel(
-    title: 'Join the Community',
+    title: 'Saerch and Discover ',
     description:
-        'Connect with fellow fans, discuss your favorite shows, and share your reviews.',
+        'Explore a vast library of anime and manga with advanced search features.',
     image: 'assets/images/onboarding3.json',
   ),
 ];
