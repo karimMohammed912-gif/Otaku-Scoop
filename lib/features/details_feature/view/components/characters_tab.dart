@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otaku_scope/core/widgets/shimmer_box.dart';
+import 'package:go_router/go_router.dart';
 
 class CharactersTab extends StatelessWidget {
   final dynamic media; // details_root.Media
@@ -32,7 +33,16 @@ class CharactersTab extends StatelessWidget {
             final node = edge.node;
             final name = node?.name?.full ?? '—';
             final img = node?.image?.large;
-            return Column(
+            return GestureDetector(
+              onTap: () {
+                final charName = node?.name?.full;
+                final charImg = node?.image?.large;
+                context.push('/character', extra: {
+                  'name': charName,
+                  'image': charImg,
+                });
+              },
+              child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 ClipRRect(
@@ -66,6 +76,7 @@ class CharactersTab extends StatelessWidget {
                   ),
                 )
               ],
+            ),
             );
           },
           separatorBuilder: (_, __) => const SizedBox(width: 12),

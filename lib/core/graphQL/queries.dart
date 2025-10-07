@@ -33,7 +33,7 @@ class Querys {
       large
     }
     bannerImage
-    characters (perPage: 10) {
+    characters (perPage: 25, sort: ROLE) {
       edges {
         node {
           name {

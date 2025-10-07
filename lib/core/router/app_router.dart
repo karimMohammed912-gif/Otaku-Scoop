@@ -6,6 +6,7 @@ import 'package:otaku_scope/core/providers/providers.dart';
 import 'package:otaku_scope/core/widgets/app_initializer.dart';
 import 'package:otaku_scope/features/details_feature/view/details_view.dart';
 import 'package:otaku_scope/features/details_feature/view/manga_details_view.dart';
+import 'package:otaku_scope/features/details_feature/view/character_details_view.dart';
 import 'package:otaku_scope/features/last_update_anime/view/last_update_view.dart';
 import 'package:otaku_scope/features/last_update_manga/view/last_update_manga_view.dart';
 import 'package:otaku_scope/features/onboardingFeature/onbarding_view.dart';
@@ -35,8 +36,9 @@ final GoRouter routerConfig = GoRouter(
         builder: (context, ref, _) {
           final themeMode = ref.watch(themeModeProvider);
           final isDark = themeMode == ThemeMode.dark;
+           final isOnboardingCompleted = ref.watch(onboardingControllerProvider);
           return Scaffold(
-            appBar: AppBar(
+            appBar:(!isOnboardingCompleted) ? null : AppBar(
               title: Text(state.name ?? 'Otaku Scope'),
               actions: [
                 Padding(
@@ -61,7 +63,7 @@ final GoRouter routerConfig = GoRouter(
                 ),
               ],
             ),
-            drawer: const CustomDrawer(),
+            drawer: (!isOnboardingCompleted) ? null : const  CustomDrawer(),
             //the child is the main content of the app
             body: child,
           );
@@ -173,6 +175,31 @@ final GoRouter routerConfig = GoRouter(
             return SlideTransition(
               position: animation.drive(tween),
               child: child,
+            );
+          },
+        );
+      },
+    ),
+
+    // Character Details (receives data via state.extra)
+    GoRoute(
+      name: 'character-details',
+      path: '/character',
+      parentNavigatorKey: _rootNavigatorKey,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          transitionDuration: const Duration(milliseconds: 240),
+          reverseTransitionDuration: const Duration(milliseconds: 200),
+          child: CharacterDetailsView(data: state.extra),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final tween = Tween(
+              begin: const Offset(0, 0.08),
+              end: Offset.zero,
+            ).chain(CurveTween(curve: Curves.easeOutCubic));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: FadeTransition(opacity: animation, child: child),
             );
           },
         );
