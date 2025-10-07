@@ -12,7 +12,47 @@ class CoverThumb extends StatelessWidget {
     // Keep a poster-like 2:3 ratio
     final height = width * 1.5;
 
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          barrierColor: Colors.black.withOpacity(0.85),
+          builder: (_) {
+            return GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  InteractiveViewer(
+                    minScale: 0.8,
+                    maxScale: 5,
+                    child: Image.network(
+                      imageUrl,
+                      fit: BoxFit.contain,
+                      errorBuilder: (_, __, ___) => const Center(child: Icon(Icons.broken_image, color: Colors.white70, size: 48)),
+                    ),
+                  ),
+                  Positioned(
+                    top: 24,
+                    right: 24,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(Icons.close, color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+      child: Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
@@ -57,6 +97,6 @@ class CoverThumb extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }
