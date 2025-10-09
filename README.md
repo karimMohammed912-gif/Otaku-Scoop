@@ -82,9 +82,42 @@ dependencies:
    flutter run
    ```
 
-## 📱 Screenshots
+## 📱 App Mockups
 
-*Coming soon - Add screenshots of your app's key features*
+Here are the design mockups showcasing the key features and user interface of Otaku Scope:
+
+### Welcome & Onboarding Experience
+<div align="center">
+  <img src="assets/mockups/mockup1.png" alt="Welcome to Otaku Scope" width="400"/>
+  <p><em>Welcome to Otaku Scope - Beautiful onboarding experience with animated characters and splash screen</em></p>
+</div>
+
+### App Introduction & Features
+<div align="center">
+  <img src="assets/mockups/mockup2.png" alt="App Introduction" width="400"/>
+  <p><em>App Introduction - Discover the full anime universe with detailed character profiles and personalized recommendations</em></p>
+</div>
+
+### Core Features: Search, Watch & Read
+<div align="center">
+  <img src="assets/mockups/mockup3.png" alt="Search, Watch & Read Features" width="400"/>
+  <p><em>Core Features - Search anime/manga, watch episodes, and read chapters with comprehensive details</em></p>
+</div>
+
+### Anime & Manga World Navigation
+<div align="center">
+  <img src="assets/mockups/mockup4.png" alt="Anime & Manga World" width="400"/>
+  <p><em>Enter the Anime & Manga World - Seasonal browsing, categories, and comprehensive content discovery</em></p>
+</div>
+
+### The Description
+<div align="center">
+  <img src="assets/mockups/mockup5.png" alt="Dashboard and Search" width="400"/>
+  <p><em>The Description of the app  </em></p>
+</div>
+  
+  ## Pdf Link For the Mockups
+  [Mockups](https://drive.google.com/file/d/10KgH2JQS3U5J5r5LTrpm--PW6d2puPQL/view?usp=drive_link)
 
 ## 🛠️ Development
 
@@ -163,13 +196,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Flutter](https://flutter.dev/) team for the amazing framework
 - [Riverpod](https://riverpod.dev/) for excellent state management
 - The open-source community for various packages and inspiration
-
-## 📞 Support
-
-If you have any questions or need help, please:
-- Open an issue on GitHub
-- Check the [Flutter documentation](https://docs.flutter.dev/)
-- Join our community discussions
 
 ---
 
